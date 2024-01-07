@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:vm="clr-namespace:MauiAppDemo.ViewModels"
+                       xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                       xmlns:common="clr-namespace:MauiAppDemo.Common"
+                       xmlns:local="clr-namespace:MauiAppDemo.Views"
+                       xmlns:m="clr-namespace:MauiAppDemo.Models"
+                       xmlns:controls="clr-namespace:MauiAppDemo.Controls"
+                       x:TypeArguments="vm:MainPageViewModel"
+                       Title="This is world"
+                       x:Class="MauiAppDemo.Views.MainPage"
+                       BackgroundColor="White"
+                       x:DataType="vm:MainPageViewModel"
+                       x:Name="mainRoot">
+
+    <Grid RowDefinitions="Auto, *, Auto" RowSpacing="0">
+        
+        <!--- CONTENT PRESENTER -->
+        <controls:ChildPageControl Margin="0"
+                                   Grid.Row="1"
+                                   x:Name="presenter"
+                                   ChildViewName="{Binding CurrChildViewName, Mode=TwoWay}"
+                                   ChildViewTitle="{Binding CurrChildViewBase.Title}"
+                                   CurrentViewBase="{Binding CurrChildViewBase, Mode=TwoWay}"
+                                   NavigationParameters="{Binding Parameters}" />
+
+        <StackLayout Grid.Row="2"  HorizontalOptions="FillAndExpand" Spacing="0"
+                     Orientation="Horizontal" Padding="0"
+                     BackgroundColor="{DynamicResource Gray2}"
+                     BindableLayout.ItemsSource="{Binding BottomActions}"
+                     x:Name="bottomActionBar">
+            <StackLayout.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="HorizontalOptions" Value="Center" />
+                    <Setter Property="HorizontalTextAlignment" Value="Center" />
+                    <Setter Property="VerticalOptions" Value="Center" />
+                    <Setter Property="VerticalTextAlignment" Value="Center" />
+                    <Setter Property="TextColor" Value="{DynamicResource AppPrimaryFontOrIconColor}" />
+                </Style>
+
+                <Style TargetType="StackLayout">
+                    <Setter Property="BackgroundColor" Value="{DynamicResource Gray2}" />
+                    <Setter Property="Padding" Value="0,8" />
+                    <Setter Property="Spacing" Value="0" />
+                    <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                </Style>
+
+                <Style TargetType="Image">
+                    <Setter Property="HeightRequest" Value="20" />
+                    <Setter Property="VerticalOptions" Value="Center" />
+                    <Setter Property="xct:IconTintColorBehavior.TintColor" Value="{StaticResource Gray7}" />
+                </Style>
+            </StackLayout.Resources>
+            <BindableLayout.ItemTemplate>
+                <DataTemplate x:DataType="m:TabMenuModel">
+                    <StackLayout>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Path=BindingContext.SwitchViewCommand, Source={x:Reference mainRoot}}"
+                                                  CommandParameter="{Binding .}" />
+                        </StackLayout.GestureRecognizers>
+                        
+                        <Grid HeightRequest="20">
+                            <Image Source="{Binding Icon}">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding IsActive}" Value="True">
+                                        <Setter Property="xct:IconTintColorBehavior.TintColor" Value="{StaticResource AppPrimaryColor}" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Action}" Value="{x:Static common:BottomAction.More}">
+                                        <Setter Property="HeightRequest"  Value="6" />
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+                        </Grid>
+                        <Label Text="{Binding Title}" >
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding IsActive}" Value="True">
+                                    <Setter Property="TextColor" Value="{DynamicResource AppPrimaryColor}" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </StackLayout>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </Grid>
+</local:BaseContentPage>

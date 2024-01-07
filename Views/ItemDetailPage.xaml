@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:vm="clr-namespace:MauiAppDemo.ViewModels"
+                       xmlns:m="clr-namespace:MauiAppDemo.Models"
+                       xmlns:local="clr-namespace:MauiAppDemo.Views"
+                       x:TypeArguments="vm:ItemDetailPageViewModel"
+                       x:Class="MauiAppDemo.Views.ItemDetailPage"
+                       Title="ItemDetailPage"
+                       BackgroundColor="White">
+    <VerticalStackLayout x:DataType="vm:ItemDetailPageViewModel" Spacing="16" Padding="16">
+        <Label Text="Welcome to .NET MAUI detail page!"
+               VerticalOptions="Center" 
+               HorizontalOptions="Center" />
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="ID: " FontAttributes="Bold"/>
+            <Label Text="{Binding Detail.ID}" TextColor="Grey"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Name: " FontAttributes="Bold"/>
+            <Label Text="{Binding Detail.Name}" TextColor="Grey"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Address: " FontAttributes="Bold"/>
+            <Label Text="{Binding Detail.Address}" TextColor="Grey"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal">
+            <Label Text="City: " FontAttributes="Bold"/>
+            <Label Text="{Binding Detail.City}" TextColor="Grey"/>
+        </StackLayout>
+
+    </VerticalStackLayout>
+</local:BaseContentPage>

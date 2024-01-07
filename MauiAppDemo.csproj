@@ -1,0 +1,147 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<!--<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>-->
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
+
+		<!-- Note for MacCatalyst:
+		The default runtime is maccatalyst-x64, except in Release config, in which case the default is maccatalyst-x64;maccatalyst-arm64.
+		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
+		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
+		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
+		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+
+		<OutputType>Exe</OutputType>
+		<RootNamespace>MauiAppDemo</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<!-- Display name -->
+		<ApplicationTitle>MauiAppDemo</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.mauiappdemo</ApplicationId>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>-->
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<!--<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>-->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dotnet_bot.png" Resize="True" BaseSize="300,185" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Helpers\Navigation\NavigationService.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\delete_icon.png" />
+	  <None Remove="Resources\Images\icon_bookmark_black.png" />
+	  <None Remove="Resources\Images\icon_bookmark_black_filled.png" />
+	  <None Remove="Resources\Images\icon_bookmark_grey.png" />
+	  <None Remove="Resources\Images\icon_chevron_right_grey.png" />
+	  <None Remove="Resources\Images\icon_comment_black.png" />
+	  <None Remove="Resources\Images\icon_eye_half_black.png" />
+	  <None Remove="Resources\Images\icon_filter_white.png" />
+	  <None Remove="Resources\Images\icon_heart_black.png" />
+	  <None Remove="Resources\Images\icon_heart_black_filled.png" />
+	  <None Remove="Resources\Images\icon_link_redirect_dark_grey.png" />
+	  <None Remove="Resources\Images\icon_news_grey.png" />
+	  <None Remove="Resources\Images\icon_news_hr_grey.png" />
+	  <None Remove="Resources\Images\icon_new_news_identifier.png" />
+	  <None Remove="Resources\Images\icon_search_white.png" />
+	  <None Remove="Resources\Images\icon_sync_black.png" />
+	  <None Remove="Resources\Images\icon_sync_white.png" />
+	  <None Remove="Resources\Images\icon_user_default_white.png" />
+	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\qr_code_icon.png" />
+	  <None Remove="Resources\Images\search.png" />
+	  <None Remove="Resources\Images\ss.png" />
+	  <None Remove="Resources\Images\tab_activities_black.png" />
+	  <None Remove="Resources\Images\tab_alert_black.png" />
+	  <None Remove="Resources\Images\tab_directory_black.png" />
+	  <None Remove="Resources\Images\tab_home_black.png" />
+	  <None Remove="Resources\Images\tab_info_black.png" />
+	  <None Remove="Resources\Images\tab_more_black.png" />
+	  <None Remove="Resources\Images\tab_news_black.png" />
+	  <None Remove="Resources\Images\tab_presence_black.png" />
+	  <None Remove="Resources\Images\tab_setting_black.png" />
+	  <None Remove="Resources\Images\user_icon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="akavache" Version="9.1.20" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+    </ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\Base\BasePage.xaml.cs">
+	    <DependentUpon>BasePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Home\NewsView.xaml.cs">
+	    <DependentUpon>NewsView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Base\BasePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Home\NewsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Home\HomeView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ItemDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Interfaces\" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-android'">
+	  <PackageReference Include="FreakyEffects">
+	    <Version>0.1.0</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
+	  <PackageReference Include="FreakyEffects">
+	    <Version>0.1.0</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+</Project>
