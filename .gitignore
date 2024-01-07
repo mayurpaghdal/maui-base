@@ -3,5 +3,5 @@
 ################################################################################
 
 /.vs
-/obj
-/bin
+/maui-base.events/bin/Debug/net8.0
+/maui-base.events/obj
