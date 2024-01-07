@@ -3,7 +3,5 @@
 ################################################################################
 
 /.vs
-/maui-base/bin
-/maui-base/obj
-/maui-base.events/bin
-/maui-base.events/obj
+/obj
+/bin
