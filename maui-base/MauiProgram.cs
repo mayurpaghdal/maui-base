@@ -1,4 +1,5 @@
 ﻿using Maui.FreakyEffects;
+using MauiBase.Events;
 using Microsoft.Extensions.Logging;
 
 namespace MauiAppDemo;
@@ -34,8 +35,10 @@ public static class MauiProgram
     {
         //Add Platform specific Dependencies
         services.AddSingleton(Connectivity.Current);
+        services.AddSingleton<IEventAggregator, EventAggregator>();
 
         //Register Cache Barrel
+        #region Cache Registration
         Akavache.Registrations.Start("MauiAppDemo");
         IBlobCache cache = null!;
         ISecureBlobCache secureCache = null!;
@@ -47,7 +50,9 @@ public static class MauiProgram
         catch { }
 
         services.AddSingleton(cache);
-        services.AddSingleton(secureCache);
+        services.AddSingleton(secureCache); 
+        #endregion
+
 
         //Register API Service
 

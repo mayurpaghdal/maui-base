@@ -144,4 +144,8 @@
 	  </PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\maui-base.events\maui-base.events.csproj" />
+	</ItemGroup>
+
 </Project>

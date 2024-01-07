@@ -112,13 +112,19 @@ public class HomeViewModel : ChildBaseViewModel
 
     #region Services
     private readonly IBlobCache _cache;
+    private readonly IEventAggregator _eventAggregator;
+    #endregion
+
+    #region Commands
+    private IRelayCommand DoClick { get; set; }
     #endregion
 
     #region Ctor
-    public HomeViewModel(IBlobCache cache)
+    public HomeViewModel(IBlobCache cache,
+                         IEventAggregator eventAggregator)
         : base()
     {
-        
+        _eventAggregator = eventAggregator;
         _cache = cache;
 
         Title = "Home"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
@@ -131,7 +137,9 @@ public class HomeViewModel : ChildBaseViewModel
     #region Overridden Methods
     public override void InitCommands()
     {
-        
+        DoClick = new RelayCommand(() => {
+            _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish();
+        });
     }
 
     public override void SetResources()
@@ -163,6 +171,7 @@ public class HomeViewModel : ChildBaseViewModel
     {
         try
         {
+            _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish();
             ShowFilter = false;
             ShowSearch = false;
             ShowSyncIcon = false;

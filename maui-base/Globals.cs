@@ -22,3 +22,4 @@ global using System.Reactive.Linq;
 global using System.Reflection;
 global using System.Text;
 global using System.Threading.Tasks;
+global using MauiBase.Events;

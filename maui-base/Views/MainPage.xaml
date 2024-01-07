@@ -15,7 +15,10 @@
                        x:Name="mainRoot">
 
     <Grid RowDefinitions="Auto, *, Auto" RowSpacing="0">
-        
+
+        <Label Text="{Binding Title}"  HorizontalOptions="Center"
+               Padding="6,12"/>
+
         <!--- CONTENT PRESENTER -->
         <controls:ChildPageControl Margin="0"
                                    Grid.Row="1"

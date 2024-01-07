@@ -3,10 +3,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:controls="clr-namespace:MauiAppDemo.Controls"
                     x:Class="MauiAppDemo.Views.HomeView">
-    <VerticalStackLayout>
+    <VerticalStackLayout Spacing="12">
         <Label 
             Text="Welcome to .NET MAUI this is home page.!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Label 
+    Text="{Binding Title}"
+    VerticalOptions="Center" 
+    HorizontalOptions="Center" />
+        
+        <Button Text="Test Event Aggregation"
+                HorizontalOptions="Center"
+                Command="{Binding DoClick}" />
     </VerticalStackLayout>
 </controls:ChildView>

@@ -1,7 +1,10 @@
-﻿namespace MauiAppDemo.ViewModels;
+﻿using System.Diagnostics.Metrics;
+
+namespace MauiAppDemo.ViewModels;
 
 public partial class MainPageViewModel : BaseViewModel
 {
+    int counter = 0;
     #region Data Members
     private ObservableCollection<TabMenuModel> _bottomActions = [];
     private ObservableCollection<TabMenuModel> _bottomActionsLevel2 = [];
@@ -91,10 +94,22 @@ public partial class MainPageViewModel : BaseViewModel
     public IRelayCommand<TabMenuModel> SwitchViewCommand { get; set; }
     #endregion
 
+    #region Services
+    private readonly IEventAggregator _eventAggregator;
+    #endregion
+
     #region Ctor
-    public MainPageViewModel()
+    public MainPageViewModel(IEventAggregator eventAggregator)
     {
+        _eventAggregator = eventAggregator;
         InitCommands();
+
+        _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Subscribe(ShowMessage);
+    }
+
+    private void ShowMessage()
+    {
+        Title = $"Things changed {++counter}";
     }
     #endregion
 
