@@ -110,17 +110,15 @@ public class NewsViewModel : ChildBaseViewModel
     #endregion
 
     #region Services
-    private readonly IBlobCache _cache;
     #endregion
 
     #region Ctor
-    public NewsViewModel(IBlobCache cache)
-        : base()
+    public NewsViewModel(IBlobCache cache,
+                         IEventAggregator eventAggregator)
+        : base(eventAggregator, cache)
     {
         
-        _cache = cache;
-
-        Title = "Home"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
+        Title = "News"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
 
         InitCommands();
         SetResources();
@@ -162,6 +160,7 @@ public class NewsViewModel : ChildBaseViewModel
     {
         try
         {
+            _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish();
             ShowFilter = false;
             ShowSearch = false;
             ShowSyncIcon = false;

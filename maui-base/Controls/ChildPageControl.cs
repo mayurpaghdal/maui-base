@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using MauiAppDemo.Helpers;
+using System.Reflection;
 
 namespace MauiAppDemo.Controls;
 
@@ -28,7 +29,6 @@ public class ChildPageControl : ContentView
     }
 
     public static readonly BindableProperty IsSubMenuVisibleProperty = BindableProperty.Create(nameof(IsSubMenuVisible), typeof(bool), typeof(bool), default(bool));
-
 
     public string ChildViewName
     {
@@ -204,15 +204,14 @@ public class ChildPageControl : ContentView
 
             if (!viewExists)
             {
-                view = (App.Services.GetService(viewType) as ChildView)!;
-                //ContainerProvider.Resolve(viewType, viewType.Name) as ChildView;
+                view = (ServiceHelper.GetService(viewType) as ChildView)!;
+
                 var viewAttribute = view.GetType().GetTypeInfo().GetCustomAttribute<ChildViewModelAttribute>();
 
                 if (viewAttribute == null)
                     throw new Exception($"You forgot to add 'ChildViewModel' attribute for {viewType.Name}. Go to {viewType.Name}.xaml.cs and add ChildViewModelAttribute with the type of the ViewModel for it.");
 
-                //TODO
-                var vmInstance = App.Services.GetService(viewAttribute.ViewModelType);
+                var vmInstance = ServiceHelper.GetService(viewAttribute.ViewModelType);
 
                 if (vmInstance is not ChildBaseViewModel)
                     throw new Exception("Type in the attribute is not a ChildViewBase. Modify it.");

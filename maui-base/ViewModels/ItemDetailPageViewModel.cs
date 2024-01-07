@@ -7,10 +7,14 @@ public partial class ItemDetailPageViewModel : BaseViewModel
     public DetailModel detail = new();
     #endregion
 
+    #region services
+    private readonly IEventAggregator _eventAggregator;
+    #endregion
+
     #region Ctor
-    public ItemDetailPageViewModel()
+    public ItemDetailPageViewModel(IEventAggregator eventAggregator)
     {
-        
+        _eventAggregator = eventAggregator;
     }
     #endregion
 
@@ -26,6 +30,8 @@ public partial class ItemDetailPageViewModel : BaseViewModel
     public override void OnNavigatedTo(NavigationParameters parameters)
     {
         base.OnNavigatedTo(parameters);
+
+        _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish();
 
         this.Title = "Hello World";
 

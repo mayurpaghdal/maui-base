@@ -5,7 +5,7 @@ namespace MauiBase.Events;
 ///</summary>
 public abstract class EventBase
 {
-    private readonly List<IEventSubscription> _subscriptions = [];
+    private readonly List<IEventSubscription> _subscriptions = new();
 
     /// <summary>
     /// Allows the SynchronizationContext to be set by the EventAggregator for UI Thread Dispatching
@@ -87,7 +87,7 @@ public abstract class EventBase
 
     private List<Action<object[]>> PruneAndReturnStrategies()
     {
-        List<Action<object[]>> returnList =[];
+        List<Action<object[]>> returnList = [];
 
         lock (Subscriptions)
         {

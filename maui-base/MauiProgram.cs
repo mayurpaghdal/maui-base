@@ -1,5 +1,4 @@
-﻿using Maui.FreakyEffects;
-using MauiBase.Events;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace MauiAppDemo;
@@ -18,7 +17,6 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             }).ConfigureEffects(effects =>
             {
-                effects.InitFreakyEffects();
             });
 
 #if DEBUG
@@ -53,19 +51,13 @@ public static class MauiProgram
         services.AddSingleton(secureCache); 
         #endregion
 
-
         //Register API Service
 
         //Register View Models
-        services.AddSingleton<MainPageViewModel>();
+        services.AddScoped<MainPageViewModel>();
         services.AddScoped<ItemDetailPageViewModel>();
 
-        services.AddScoped<HomeView>();
-        services.AddScoped<NewsView>();
-
-        services.AddScoped<HomeViewModel>();
-        services.AddScoped<NewsViewModel>();
-
-        App.Services = services.BuildServiceProvider();
+        services.AddScoped<HomeView, HomeViewModel>();
+        services.AddScoped<NewsView, NewsViewModel>();
     }
 }

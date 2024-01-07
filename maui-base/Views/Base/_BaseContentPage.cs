@@ -10,7 +10,7 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
     protected TViewModel _vm { get; set; }
     internal NavigationParameters Parameters { get; set; }
 
-    protected event EventHandler ViewModelInitialized; 
+    protected event EventHandler ViewModelInitialized;
     #endregion
 
     #region Ctor
@@ -45,6 +45,6 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
         }
 
         _vm.OnRecurringNavigatedTo(Parameters);
-    } 
+    }
     #endregion
 }

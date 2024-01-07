@@ -21,16 +21,18 @@ public partial class BaseViewModel : RootBaseViewModel
     #endregion
 
     #region Command Exeutables
-    
+
     #endregion
 
     //Called on Page Appearing
+    #region Navigation Methods
     public virtual async void OnNavigatedTo(NavigationParameters parameters) =>
-        await Task.CompletedTask;
+    await Task.CompletedTask;
 
     public virtual async void OnRecurringNavigatedTo(NavigationParameters parameters) =>
         await Task.CompletedTask;
 
     public virtual async void OnNavigatedFrom(NavigationParameters parameters) =>
-        await Task.CompletedTask;
+        await Task.CompletedTask; 
+    #endregion
 }

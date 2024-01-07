@@ -5,7 +5,6 @@ namespace MauiAppDemo
     public partial class App : Application
     {
         #region Static Properties
-        internal static IServiceProvider Services { get; set; }
         internal static App Instance => (Current as App)!;
         public static BottomAction? CurrentBottomAction { get; set; }
         public static NotificationPayloadModel PassedPayload { get; set; }
@@ -23,7 +22,6 @@ namespace MauiAppDemo
 
         #endregion
 
-
         #region Ctor
         public App()
         {
@@ -31,7 +29,5 @@ namespace MauiAppDemo
             MainPage = new NavigationPage(new MainPage());
         } 
         #endregion
-
-
     }
 }

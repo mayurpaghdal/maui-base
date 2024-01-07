@@ -32,6 +32,5 @@
             <Label Text="City: " FontAttributes="Bold"/>
             <Label Text="{Binding Detail.City}" TextColor="Grey"/>
         </StackLayout>
-
     </VerticalStackLayout>
 </local:BaseContentPage>

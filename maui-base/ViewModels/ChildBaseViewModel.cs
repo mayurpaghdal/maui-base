@@ -94,14 +94,21 @@
         #endregion
 
         #region Services
+        protected readonly IBlobCache _cache;
+        protected readonly IEventAggregator _eventAggregator;
         #endregion
 
         #region Ctor
-        public ChildBaseViewModel()
+        public ChildBaseViewModel(IEventAggregator eventAggregator,
+                                  IBlobCache cache = null!)
         {
+            _eventAggregator = eventAggregator;
+            _cache = cache;
+
             ShowSearch = false;
             ShowFilter = false;
             ShowSyncIcon = false;
+
         }
         #endregion
 
@@ -161,7 +168,7 @@
         public void InvokeFilterClick() => FilterClicked?.Invoke();
         public void InvokeSearchClick() => SearchClicked?.Invoke();
         public void InvokeSyncIconClick() => SyncClicked?.Invoke();
-        
+
         public virtual Task DestroyAsync()
         {
             this.PropertyChanged -= PropChanged!;
