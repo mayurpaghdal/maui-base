@@ -1,5 +1,5 @@
 ﻿
-namespace MauiAppDemo.Common;
+namespace MauiBase.Common;
 
 public struct NotificationType
 {

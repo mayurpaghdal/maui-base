@@ -1,6 +1,6 @@
-﻿using MauiAppDemo.Helpers;
+﻿using MauiBase.Helpers;
 
-namespace MauiAppDemo.Views;
+namespace MauiBase.Views;
 
 public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : BaseViewModel
 {

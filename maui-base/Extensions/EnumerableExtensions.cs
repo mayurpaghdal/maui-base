@@ -1,4 +1,4 @@
-﻿namespace MauiAppDemo.Extensions;
+﻿namespace MauiBase.Extensions;
 
 [EditorBrowsable(EditorBrowsableState.Never)]
 public static class EnumerableExtensions

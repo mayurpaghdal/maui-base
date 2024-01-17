@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <controls:ChildView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    xmlns:controls="clr-namespace:MauiAppDemo.Controls"
-                    xmlns:vm="clr-namespace:MauiAppDemo.ViewModels"
-                    x:Class="MauiAppDemo.Views.HomeView"
+                    xmlns:controls="clr-namespace:MauiBase.Controls"
+                    xmlns:vm="clr-namespace:MauiBase.ViewModels"
+                    x:Class="MauiBase.Views.HomeView"
                     x:DataType="vm:HomeViewModel">
     <VerticalStackLayout Spacing="12">
         <Label 

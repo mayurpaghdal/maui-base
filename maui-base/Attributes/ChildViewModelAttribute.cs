@@ -1,4 +1,4 @@
-﻿namespace MauiAppDemo.Attributes;
+﻿namespace MauiBase.Attributes;
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
 public class ChildViewModelAttribute : Attribute

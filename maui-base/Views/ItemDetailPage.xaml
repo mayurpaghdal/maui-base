@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <local:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                       xmlns:vm="clr-namespace:MauiAppDemo.ViewModels"
-                       xmlns:m="clr-namespace:MauiAppDemo.Models"
-                       xmlns:local="clr-namespace:MauiAppDemo.Views"
+                       xmlns:vm="clr-namespace:MauiBase.ViewModels"
+                       xmlns:m="clr-namespace:MauiBase.Models"
+                       xmlns:local="clr-namespace:MauiBase.Views"
                        x:TypeArguments="vm:ItemDetailPageViewModel"
-                       x:Class="MauiAppDemo.Views.ItemDetailPage"
+                       x:Class="MauiBase.Views.ItemDetailPage"
                        Title="ItemDetailPage"
                        BackgroundColor="White">
     <VerticalStackLayout x:DataType="vm:ItemDetailPageViewModel" Spacing="16" Padding="16">

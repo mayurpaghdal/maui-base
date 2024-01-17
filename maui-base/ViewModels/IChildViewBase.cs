@@ -1,4 +1,4 @@
-﻿namespace MauiAppDemo.ViewModels;
+﻿namespace MauiBase.ViewModels;
 
 public interface IChildViewBase
 {

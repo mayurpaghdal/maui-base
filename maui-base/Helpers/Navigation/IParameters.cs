@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace MauiAppDemo.Helpers.Navigation;
+namespace MauiBase.Helpers.Navigation;
 
 //
 // Summary:

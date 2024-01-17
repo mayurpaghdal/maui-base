@@ -1,5 +1,5 @@
 ﻿
-namespace MauiAppDemo.Views;
+namespace MauiBase.Views;
 
 public partial class BasePage : ContentPage
 {

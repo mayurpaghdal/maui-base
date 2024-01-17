@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Metrics;
 
-namespace MauiAppDemo.ViewModels;
+namespace MauiBase.ViewModels;
 
 public partial class MainPageViewModel : BaseViewModel
 {

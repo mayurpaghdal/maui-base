@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace MauiAppDemo.ViewModels;
+namespace MauiBase.ViewModels;
 
 public partial class RootBaseViewModel : ObservableObject
 {

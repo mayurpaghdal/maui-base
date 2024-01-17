@@ -1,4 +1,4 @@
-﻿namespace MauiAppDemo.Helpers.Navigation;
+﻿namespace MauiBase.Helpers.Navigation;
 
 //
 // Summary:

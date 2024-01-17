@@ -1,4 +1,4 @@
-﻿namespace MauiAppDemo.Helpers;
+﻿namespace MauiBase.Helpers;
 
 public static class ServiceHelper
 {

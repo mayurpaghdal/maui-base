@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using MauiBase.Effects;
+using MauiBase.Platforms.Effects;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Controls.Compatibility.Hosting;
 
-namespace MauiAppDemo;
+namespace MauiBase;
 
 public static class MauiProgram
 {
@@ -15,8 +17,15 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-            }).ConfigureEffects(effects =>
+            })
+            .UseMauiCompatibility()
+            .ConfigureMauiHandlers(handlers =>
             {
+                //handlers.AddCompatibilityRenderer(typeof(TouchRoutingEffect), typeof(TouchEffectPlatform));
+            })
+            .ConfigureEffects(effects =>
+            {
+                effects.Add<TouchRoutingEffect, TouchEffectPlatform>();
             });
 
 #if DEBUG
@@ -26,7 +35,6 @@ public static class MauiProgram
         RegisterTypes(builder.Services);
 
         return builder.Build();
-
     }
 
     private static void RegisterTypes(IServiceCollection services)
@@ -35,9 +43,9 @@ public static class MauiProgram
         services.AddSingleton(Connectivity.Current);
         services.AddSingleton<IEventAggregator, EventAggregator>();
 
-        //Register Cache Barrel
+        //Register Cache
         #region Cache Registration
-        Akavache.Registrations.Start("MauiAppDemo");
+        Akavache.Registrations.Start("MauiBase");
         IBlobCache cache = null!;
         ISecureBlobCache secureCache = null!;
         try

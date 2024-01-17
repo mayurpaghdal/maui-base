@@ -1,5 +1,5 @@
 ﻿
-namespace MauiAppDemo.Helpers.Navigation
+namespace MauiBase.Helpers.Navigation
 {
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class ParametersExtensions

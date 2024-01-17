@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     ios:Page.PrefersHomeIndicatorAutoHidden="true"
-    x:Class="MauiAppDemo.Views.BasePage"
+    x:Class="MauiBase.Views.BasePage"
     BackgroundColor="{StaticResource PageBackgroundColor}">
 
     <Grid

@@ -1,4 +1,4 @@
-namespace MauiAppDemo.Views;
+namespace MauiBase.Views;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
 [ChildViewModel(typeof(NewsViewModel), true)]

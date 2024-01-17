@@ -1,7 +1,7 @@
-﻿using MauiAppDemo.Helpers;
+﻿using MauiBase.Helpers;
 using System.Reflection;
 
-namespace MauiAppDemo.Controls;
+namespace MauiBase.Controls;
 
 //class ChildPageControl
 public class ChildPageControl : ContentView

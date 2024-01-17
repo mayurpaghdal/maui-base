@@ -1,5 +1,5 @@
 ﻿
-namespace MauiAppDemo.Events;
+namespace MauiBase.Events;
 
 public class RootNavigationRequestedEventArgs : System.EventArgs
 {

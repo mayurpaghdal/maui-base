@@ -1,28 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <local:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                       xmlns:vm="clr-namespace:MauiAppDemo.ViewModels"
+                       xmlns:vm="clr-namespace:MauiBase.ViewModels"
                        xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                       xmlns:common="clr-namespace:MauiAppDemo.Common"
-                       xmlns:local="clr-namespace:MauiAppDemo.Views"
-                       xmlns:m="clr-namespace:MauiAppDemo.Models"
-                       xmlns:controls="clr-namespace:MauiAppDemo.Controls"
+                       xmlns:xe="clr-namespace:MauiBase.Effects"
+                       xmlns:common="clr-namespace:MauiBase.Common"
+                       xmlns:local="clr-namespace:MauiBase.Views"
+                       xmlns:m="clr-namespace:MauiBase.Models"
+                       xmlns:controls="clr-namespace:MauiBase.Controls"
                        x:TypeArguments="vm:MainPageViewModel"
                        Title="This is world"
-                       x:Class="MauiAppDemo.Views.MainPage"
+                       x:Class="MauiBase.Views.MainPage"
                        BackgroundColor="White"
                        x:DataType="vm:MainPageViewModel"
                        x:Name="mainRoot">
 
     <Grid RowDefinitions="Auto, *, Auto" RowSpacing="0">
 
-        <HorizontalStackLayout>
+        <HorizontalStackLayout Spacing="6">
             
             <Label Text="{Binding Title}"  HorizontalOptions="Center"
                    Padding="6,12"/>
 
             <Button Text="Detail"
-                    Command="{Binding GoToDetailPageCommand}" />
+                    Command="{Binding GoToDetailPageCommand}" 
+                    VerticalOptions="Center"/>
+
+            <StackLayout BackgroundColor="Coral" 
+                         Padding="16,8"
+                         xe:TouchEffect.Color="{StaticResource TranslucidBlack2}"
+                         VerticalOptions="Center">
+                <Label Text="Effector" FontAttributes="Bold"/>
+            </StackLayout>
         </HorizontalStackLayout>
 
         <!--- CONTENT PRESENTER -->

@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
 
-namespace MauiAppDemo
+namespace MauiBase
 {
     public partial class App : Application
     {

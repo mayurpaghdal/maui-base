@@ -1,4 +1,4 @@
-﻿namespace MauiAppDemo.Controls;
+﻿namespace MauiBase.Controls;
 
 public class ChildView : ContentView
 {

@@ -1,4 +1,4 @@
-﻿namespace MauiAppDemo.Models;
+﻿namespace MauiBase.Models;
 
 public class BaseModel : ObservableObject
 {
