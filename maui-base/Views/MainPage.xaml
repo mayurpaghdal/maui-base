@@ -68,7 +68,7 @@
                 <Style TargetType="Image">
                     <Setter Property="HeightRequest" Value="20" />
                     <Setter Property="VerticalOptions" Value="Center" />
-                    <Setter Property="xct:IconTintColorBehavior.TintColor" Value="{StaticResource Gray7}" />
+                    <Setter Property="xe:IconTintColorEffect.Color" Value="{StaticResource Gray7}" />
                 </Style>
             </StackLayout.Resources>
             <BindableLayout.ItemTemplate>
@@ -84,7 +84,7 @@
                             <Image Source="{Binding Icon}">
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding IsActive}" Value="True">
-                                        <Setter Property="xct:IconTintColorBehavior.TintColor" Value="{StaticResource AppPrimaryColor}" />
+                                        <Setter Property="xe:IconTintColorEffect.Color" Value="{StaticResource AppPrimaryColor}" />
                                     </DataTrigger>
                                     <DataTrigger TargetType="Image" Binding="{Binding Action}" Value="{x:Static common:BottomAction.More}">
                                         <Setter Property="HeightRequest"  Value="6" />

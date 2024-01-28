@@ -26,6 +26,7 @@ public static class MauiProgram
             .ConfigureEffects(effects =>
             {
                 effects.Add<TouchRoutingEffect, TouchEffectPlatform>(); 
+                effects.Add<IconTintColorRoutingEffect, IconTintColorEffectPlatform>(); 
                 effects.Add<CommandsRoutingEffect, CommandEffectPlatform>();
             });
 

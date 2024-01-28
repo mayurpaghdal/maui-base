@@ -210,7 +210,7 @@ internal static class TouchCollector
 }
 public class TouchEffectPlatform : PlatformEffect
 {
-    public bool EnableRipple => true;// Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop;
+    public bool EnableRipple => OperatingSystem.IsAndroidVersionAtLeast((int)Android.OS.BuildVersionCodes.Lollipop);
     public bool IsDisposed => Container.RootView == null;
 
     public AV.View View => Control ?? Container;
