@@ -1,5 +1,5 @@
 ﻿using MauiBase.Effects;
-using MauiBase.Platforms.Effects;
+using MauiBase.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 
@@ -25,7 +25,8 @@ public static class MauiProgram
             })
             .ConfigureEffects(effects =>
             {
-                effects.Add<TouchRoutingEffect, TouchEffectPlatform>();
+                effects.Add<TouchRoutingEffect, TouchEffectPlatform>(); 
+                effects.Add<CommandsRoutingEffect, CommandEffectPlatform>();
             });
 
 #if DEBUG

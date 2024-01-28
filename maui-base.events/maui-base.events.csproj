@@ -11,4 +11,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\maui-base\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
 </Project>

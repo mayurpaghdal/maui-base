@@ -73,12 +73,13 @@
             </StackLayout.Resources>
             <BindableLayout.ItemTemplate>
                 <DataTemplate x:DataType="m:TabMenuModel">
-                    <StackLayout>
-                        <StackLayout.GestureRecognizers>
+                    <StackLayout xe:TouchEffect.Color="{StaticResource TranslucidBlack2}"
+                                 xe:Commands.Tap="{Binding Path=BindingContext.SwitchViewCommand, Source={x:Reference mainRoot}}"
+                                 xe:Commands.TapParameter="{Binding .}">
+                        <!--<StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Path=BindingContext.SwitchViewCommand, Source={x:Reference mainRoot}}"
                                                   CommandParameter="{Binding .}" />
-                        </StackLayout.GestureRecognizers>
-                        
+                        </StackLayout.GestureRecognizers>-->
                         <Grid HeightRequest="20">
                             <Image Source="{Binding Icon}">
                                 <Image.Triggers>

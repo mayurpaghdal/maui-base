@@ -1,5 +1,4 @@
-﻿
-namespace MauiBase.ViewModels;
+﻿namespace MauiBase.ViewModels;
 
 public class HomeViewModel : ChildBaseViewModel
 {
