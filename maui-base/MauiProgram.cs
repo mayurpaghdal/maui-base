@@ -1,7 +1,6 @@
-﻿using MauiBase.Effects;
-using MauiBase.ViewModels;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
+using Mopups.Hosting;
 
 namespace MauiBase;
 
@@ -29,7 +28,8 @@ public static class MauiProgram
                 effects.Add<IconTintColorRoutingEffect, IconTintColorEffectPlatform>(); 
                 effects.Add<CommandsRoutingEffect, CommandEffectPlatform>();
                 effects.Add<RoundRoutingEffect, RoundEffectPlatform>();
-            });
+            })
+            .ConfigureMopups();
 
 #if DEBUG
         builder.Logging.AddDebug();

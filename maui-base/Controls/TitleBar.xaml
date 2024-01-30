@@ -23,7 +23,7 @@
                 </StackLayout>
 
                 <Label Text="{Binding Title, TargetNullValue=Title}"
-                       FontSize="16"
+                       Style="{StaticResource PageHeaderTextStyle}"
                        TextColor="{AppThemeBinding Dark={StaticResource TextColorPrimaryDark}, Light={StaticResource TextColorPrimaryLight}}"
                        Margin="0"    
                        VerticalOptions="Center"

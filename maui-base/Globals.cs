@@ -5,6 +5,7 @@ global using CommunityToolkit.Mvvm.Input;
 global using MauiBase.Attributes;
 global using MauiBase.Common;
 global using MauiBase.Controls;
+global using MauiBase.Effects;
 global using MauiBase.Events;
 global using MauiBase.Extensions;
 global using MauiBase.Helpers.Navigation;
