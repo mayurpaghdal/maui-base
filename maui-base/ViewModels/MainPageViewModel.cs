@@ -109,7 +109,7 @@ public partial class MainPageViewModel : BaseViewModel
 
     private void ShowMessage()
     {
-        Title = $"Things changed {++counter}";
+        //Title = $"Things changed {++counter}";
     }
     #endregion
 
@@ -176,7 +176,35 @@ public partial class MainPageViewModel : BaseViewModel
             Title = "Directory",
             Icon = ImageSource.FromFile(IconKey.TAB_DIRECTORY_BLACK),
             IsActive = BottomActions.Count == 0,
-            Command = SwitchViewCommand
+        });
+
+        BottomActions.Add(new TabMenuModel
+        {
+            Action = BottomAction.More,
+            Title = "More",
+            Icon = ImageSource.FromFile(IconKey.TAB_MORE_BLACK),
+            IsActive = BottomActions.Count == 0,
+        });
+
+        BottomActionsLevel2.Add(new TabMenuModel
+        {
+            Action = BottomAction.LeavesView,
+            Title = "Presence",
+            Icon = ImageSource.FromFile(IconKey.TAB_PRESENCE_BLACK),
+        });
+
+        BottomActionsLevel2.Add(new TabMenuModel
+        {
+            Action = BottomAction.PagesView,
+            Title = "Portal",
+            Icon = ImageSource.FromFile(IconKey.TAB_INFO_BLACK),
+        });
+
+        BottomActionsLevel2.Add(new TabMenuModel
+        {
+            Action = BottomAction.SettingsView,
+            Title = "Settings",
+            Icon = ImageSource.FromFile(IconKey.TAB_SETTING_BLACK),
         });
 
         try

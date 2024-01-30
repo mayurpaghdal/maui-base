@@ -4,7 +4,8 @@
                     xmlns:controls="clr-namespace:MauiBase.Controls"
                     xmlns:vm="clr-namespace:MauiBase.ViewModels"
                     x:Class="MauiBase.Views.HomeView"
-                    x:DataType="vm:HomeViewModel">
+                    x:DataType="vm:HomeViewModel"
+                    Padding="16">
     <VerticalStackLayout Spacing="12">
         <Label 
             Text="Welcome to .NET MAUI this is home page.!"

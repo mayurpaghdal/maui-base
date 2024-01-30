@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xe="clr-namespace:MauiBase.Effects"
+             x:Class="MauiBase.Controls.PopupView"
+             IsVisible="false"
+             BackgroundColor="{StaticResource TranslucidBlack}"
+             x:Name="popupRoot">
+    <ContentView.ControlTemplate>
+        <ControlTemplate>
+                <Grid RowSpacing="0">
+                <Grid BackgroundColor="{TemplateBinding BackgroundColor}" Opacity="0.05">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PopupBackground_Tapped" />
+                    </Grid.GestureRecognizers>
+                </Grid>
+
+                <Grid VerticalOptions="{TemplateBinding ContentVerticalOptions}" 
+                      BackgroundColor="{TemplateBinding ContentBackgroundColor}"
+                      Margin="{TemplateBinding ContentMargin}"
+                      xe:CornerRadiusEffect.CornerRadius="{TemplateBinding ContentCornerRadius}">
+                    
+                    <ContentPresenter Padding="{TemplateBinding Padding}" 
+                                      Margin="{TemplateBinding Margin}" />
+                </Grid>
+            </Grid>
+        </ControlTemplate>
+    </ContentView.ControlTemplate>
+</ContentView>

@@ -247,7 +247,7 @@ public class TouchEffectPlatform : PlatformEffect
         SetEffectColor();
 
         TouchCollector.Add(View, OnTouch);
-        (Container as ViewGroup).AddView(_viewOverlay);
+        (Container as ViewGroup)?.AddView(_viewOverlay);
         _viewOverlay.BringToFront();
     }
 
@@ -256,7 +256,7 @@ public class TouchEffectPlatform : PlatformEffect
         if (IsDisposed) return;
 
         //_viewOverlay.RemoveFromParent();
-        (Container as ViewGroup).RemoveView(_viewOverlay);
+        (Container as ViewGroup)?.RemoveView(_viewOverlay);
         _viewOverlay.Pressed = false;
         _viewOverlay.Foreground = null;
         _viewOverlay.Dispose();
@@ -317,8 +317,13 @@ public class TouchEffectPlatform : PlatformEffect
 
     void ViewOnLayoutChange(object sender, AV.View.LayoutChangeEventArgs layoutChangeEventArgs)
     {
-        var group = (AV.ViewGroup)sender;
-        if (group == null || IsDisposed) return;
+        AV.View group = (sender as AV.ViewGroup)!;
+
+        if (group is null)
+            group = (sender as AV.View)!;
+
+        if (group is null || IsDisposed) 
+            return;
         _viewOverlay.Right = group.Width;
         _viewOverlay.Bottom = group.Height;
     }
@@ -327,16 +332,17 @@ public class TouchEffectPlatform : PlatformEffect
 
     RippleDrawable CreateRipple(AG.Color color)
     {
+        var maskColor = App.Current.UserAppTheme == AppTheme.Dark ? AG.Color.Black : AG.Color.White;
         if (Element is Layout)
         {
-            var mask = new ColorDrawable(AG.Color.White);
+            var mask = new ColorDrawable(maskColor);
             return _ripple = new RippleDrawable(GetPressedColorSelector(color), null, mask);
         }
 
         var back = View.Background;
         if (back == null)
         {
-            var mask = new ColorDrawable(AG.Color.White);
+            var mask = new ColorDrawable(maskColor);
             return _ripple = new RippleDrawable(GetPressedColorSelector(color), null, mask);
         }
 

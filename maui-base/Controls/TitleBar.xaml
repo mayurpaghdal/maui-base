@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xe="clr-namespace:MauiBase.Effects"
+             x:Class="MauiBase.Controls.TitleBar"
+             BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorPrimaryDark}, Light={StaticResource BackgroundColorPrimaryLight}}"
+             x:Name="titleBar"
+             HeightRequest="54">
+    <ContentView.Content>
+        <Grid VerticalOptions="Center" ColumnDefinitions="*, Auto">
+            <StackLayout Orientation="Horizontal" Spacing="2" VerticalOptions="Center" Margin="4, 0, 0, 0">
+                <StackLayout Padding="6,8,8,8"
+                             BackgroundColor="{Binding BackgroundColor, Source={x:Reference titleBar}}"
+                             xe:TouchEffect.Color="{StaticResource TranslucidBlack2}" 
+                             xe:Commands.Tap="{Binding BackCommand}"
+                             IsVisible="{Binding ShowBackButton, Source={x:Reference titleBar}}"
+                             xe:CornerRadiusEffect.CornerRadius="8">
+                    <Path Data="M6.35337 11.8527C6.15846 12.0484 5.84188 12.0489 5.64627 11.854L0.161785 6.38902C-0.0539287 6.17408 -0.0539278 5.82477 0.161785 5.60982L5.64627 0.14484C5.84188 -0.0500734 6.15846 -0.0495088 6.35337 0.1461C6.54829 0.34171 6.54772 0.658292 6.35212 0.853206L1.18753 5.99942L6.35211 11.1456C6.54772 11.3406 6.54829 11.6571 6.35337 11.8527Z"
+                          Fill="{AppThemeBinding Dark={StaticResource TextColorPrimaryDark}, Light={StaticResource TextColorPrimaryLight}}" 
+                          HeightRequest="20" WidthRequest="25" Aspect="Uniform"
+                          HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <!--{x:Static common:IconKey.CHEVRON_LEFT}-->
+                </StackLayout>
+
+                <Label Text="{Binding Title, TargetNullValue=Title}"
+                       FontSize="16"
+                       TextColor="{AppThemeBinding Dark={StaticResource TextColorPrimaryDark}, Light={StaticResource TextColorPrimaryLight}}"
+                       Margin="0"    
+                       VerticalOptions="Center"
+                       FontAttributes="Bold"
+                       VerticalTextAlignment="Center">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding ShowBackButton, Source={x:Reference titleBar}}" Value="False">
+                            <Setter Property="Margin" Value="16,0,0,0" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </StackLayout>
+            <Grid Grid.Column="1"
+                  HorizontalOptions="End"
+                  VerticalOptions="Fill" Margin="0,0,16,0">
+                <Frame HasShadow="False" BorderColor="Transparent" Margin="0" Padding="0"
+                       x:Name="ContentArea" BackgroundColor="Transparent" HorizontalOptions="End" />
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

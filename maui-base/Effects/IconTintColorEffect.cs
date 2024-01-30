@@ -172,6 +172,8 @@ public class IconTintColorEffectPlatform : PlatformEffect
 #if IOS
 public class IconTintColorEffectPlatform : PlatformEffect
 {
+    Color color = Colors.Transparent;
+    public UIView View => Control ?? Container;
 
     #region Overridden Methods
     protected override void OnElementPropertyChanged(PropertyChangedEventArgs args)
@@ -180,46 +182,47 @@ public class IconTintColorEffectPlatform : PlatformEffect
 
         if (args.PropertyName == IconTintColorEffect.ColorProperty.PropertyName)
         {
-            ApplyTintColor(Control, Container);
+            OnAttached();
         }
     }
 
     protected override void OnAttached()
     {
-        ApplyTintColor(Control, Container);
+        color = IconTintColorEffect.GetColor(Element);
+        ApplyTintColor();
     }
 
     protected override void OnDetached()
     {
-        ClearTintColor(Control, Container);
+        ClearTintColor();
     }
     #endregion
 
     #region Private Methods
-    void ApplyTintColor(MC.View element, UIView platformView)
+    void ApplyTintColor()
     {
         if (color is null)
         {
-            ClearTintColor(platformView, element);
+            ClearTintColor();
             return;
         }
 
-        switch (platformView)
+        switch (View)
         {
             case UIImageView imageView:
-                SetUIImageViewTintColor(imageView, element, color);
+                SetUIImageViewTintColor(imageView, color);
                 break;
             case UIButton button:
-                SetUIButtonTintColor(button, element, color);
+                SetUIButtonTintColor(button, color);
                 break;
             default:
-                throw new NotSupportedException($"{nameof(IconTintColorBehavior)} only currently supports {nameof(UIButton)} and {nameof(UIImageView)}.");
+                throw new NotSupportedException($"{nameof(IconTintColorEffectPlatform)} only currently supports {nameof(UIButton)} and {nameof(UIImageView)}.");
         }
     }
 
-    void ClearTintColor(MC.View element, UIView platformView)
+    void ClearTintColor()
     {
-        switch (platformView)
+        switch (View)
         {
             case UIImageView imageView:
                 if (imageView.Image is not null)
@@ -238,12 +241,12 @@ public class IconTintColorEffectPlatform : PlatformEffect
                 break;
 
             default:
-                throw new NotSupportedException($"{nameof(IconTintColorBehavior)} only currently supports {nameof(UIButton)} and {nameof(UIImageView)}.");
+                throw new NotSupportedException($"{nameof(IconTintColorEffectPlatform)} only currently supports {nameof(UIButton)} and {nameof(UIImageView)}.");
         }
     }
 
 
-    static void SetUIButtonTintColor(UIButton button, MC.View element, MG.Color color)
+    static void SetUIButtonTintColor(UIButton button, MG.Color color)
     {
         if (button.ImageView.Image is null)
         {
@@ -260,7 +263,7 @@ public class IconTintColorEffectPlatform : PlatformEffect
 
     }
 
-    static void SetUIImageViewTintColor(UIImageView imageView, MC.View element, MG.Color color)
+    static void SetUIImageViewTintColor(UIImageView imageView, MG.Color color)
     {
         if (imageView.Image is null)
         {
@@ -271,5 +274,5 @@ public class IconTintColorEffectPlatform : PlatformEffect
         imageView.TintColor = color.ToPlatform();
     }
     #endregion
-} 
+}
 #endif

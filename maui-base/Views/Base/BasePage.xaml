@@ -4,9 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
     ios:Page.PrefersHomeIndicatorAutoHidden="true"
-    x:Class="MauiBase.Views.BasePage"
-    BackgroundColor="{StaticResource PageBackgroundColor}">
-
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    x:Class="MauiBase.Views.BasePage">
+    <ContentPage.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="{AppThemeBinding Dark={StaticResource BackgroundColorPrimaryDark}, Light={StaticResource BackgroundColorPrimaryLight}}" />
+    </ContentPage.Behaviors>
     <Grid
         IgnoreSafeArea="True">
 

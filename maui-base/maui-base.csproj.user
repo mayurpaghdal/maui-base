@@ -12,6 +12,9 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <MauiXaml Update="Controls\TitleBar.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Views\Base\BasePage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

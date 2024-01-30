@@ -6,10 +6,10 @@ public class ChildView : ContentView
     {
         Color backgroundColorLight = Colors.White;
         Color backgroundColorDark = Colors.Black;
-        if (App.Current.Resources.TryGetValue("BackgroundColorPrimaryDark", out var colorvalue))
+        if (App.Current.Resources.TryGetValue("Black", out var colorvalue))
             backgroundColorDark = (Color)colorvalue;
 
-        if (App.Current.Resources.TryGetValue("BackgroundColorPrimaryLight", out var colorvalueLight))
+        if (App.Current.Resources.TryGetValue("White", out var colorvalueLight))
             backgroundColorLight = (Color)colorvalueLight;
 
         this.SetAppThemeColor(ContentView.BackgroundColorProperty, backgroundColorLight, backgroundColorDark);

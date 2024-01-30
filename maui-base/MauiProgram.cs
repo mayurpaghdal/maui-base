@@ -28,6 +28,7 @@ public static class MauiProgram
                 effects.Add<TouchRoutingEffect, TouchEffectPlatform>(); 
                 effects.Add<IconTintColorRoutingEffect, IconTintColorEffectPlatform>(); 
                 effects.Add<CommandsRoutingEffect, CommandEffectPlatform>();
+                effects.Add<RoundRoutingEffect, RoundEffectPlatform>();
             });
 
 #if DEBUG
