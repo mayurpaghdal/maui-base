@@ -3,6 +3,7 @@ using Mopups.Services;
 
 namespace MauiBase.Views;
 
+//Native Popup: https://redth.codes/popups-with-net-maui-no-plugin-nuget-needed
 public partial class BasePopupContentPage<TViewModel> : BasePopupPage where TViewModel : BaseViewModel
 {
     #region Data Members
