@@ -12,6 +12,7 @@ global using MauiBase.Helpers.Navigation;
 global using MauiBase.Models;
 global using MauiBase.ViewModels;
 global using MauiBase.Views;
+global using Mopups.Pages;
 global using System;
 global using System.Collections;
 global using System.Collections.Generic;

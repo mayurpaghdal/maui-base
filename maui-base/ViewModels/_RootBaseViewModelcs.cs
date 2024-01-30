@@ -1,12 +1,15 @@
-﻿using System.Text.RegularExpressions;
+﻿using Mopups.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace MauiBase.ViewModels;
 
 public partial class RootBaseViewModel : ObservableObject
 {
     public delegate void SearchHandler(string searchText);
-    
+
     #region Services
+    internal IPopupNavigation _popupNavigation;
+    internal IEventAggregator _eventAggregator;
     #endregion
 
     #region Events
@@ -43,15 +46,30 @@ public partial class RootBaseViewModel : ObservableObject
     [RelayCommand]
     async Task GoBack()
     {
+        //Specific for Popup navigation.
+        if (_popupNavigation is not null
+            && _popupNavigation.PopupStack.Count > 0)
+        {
+            await _popupNavigation.PopAsync();
+            return;
+        }
+
         if (Navigation.ModalStack.Count > 0)
+        {
+            if (Navigation.ModalStack.Count > 0)
+                await Navigation.PopModalAsync();
+        }
+        else if (Navigation.NavigationStack.Count > 0)
             await Navigation.PopAsync();
-        // Add task logic...
     }
 
     #endregion
 
-    public RootBaseViewModel()
+    public RootBaseViewModel(IEventAggregator eventAggregator = null!,
+                             IPopupNavigation popupNavigation = null!)
     {
+        _eventAggregator = eventAggregator;
+        _popupNavigation = popupNavigation;
     }
 
     #region Methods

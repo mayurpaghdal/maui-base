@@ -11,6 +11,15 @@ public partial class MainPage : BaseContentPage<MainPageViewModel>
     {
         try
         {
+            var activeVMName = App.Instance.ActiveVM?.GetType()?.Name;
+
+            if (!string.IsNullOrWhiteSpace(activeVMName)
+                && activeVMName.Contains("filterPage", StringComparison.OrdinalIgnoreCase))
+            {
+                App.Instance.ActiveVM = this._vm;
+                return true;
+            }
+
             var firstView = _vm.BottomActions.First();
             switch (_vm.ActiveAction)
             {

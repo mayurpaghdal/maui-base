@@ -1,4 +1,6 @@
 ﻿
+using Mopups.Interfaces;
+
 namespace MauiBase.ViewModels;
 
 public partial class BaseViewModel : RootBaseViewModel
@@ -10,11 +12,12 @@ public partial class BaseViewModel : RootBaseViewModel
     #endregion
 
     #region Services
-
     #endregion
 
     #region Ctor
-    public BaseViewModel()
+    public BaseViewModel(IEventAggregator eventAggregator = null!, 
+                         IPopupNavigation popupNavigation = null!)
+        : base(eventAggregator, popupNavigation)
     {
 
     }

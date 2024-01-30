@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<base:BasePopupContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                           x:Class="MauiBase.Views.NewsFilterPage"
+                           xmlns:base="clr-namespace:MauiBase.Views"
+                           xmlns:vm="clr-namespace:MauiBase.ViewModels"
+                           xmlns:xe="clr-namespace:MauiBase.Effects"
+                           x:TypeArguments="vm:NewsFilterPageViewModel"
+                           xmlns:controls="clr-namespace:MauiBase.Controls"
+                           xmlns:mopup="clr-namespace:Mopups.Pages;assembly=Mopups"
+                           xmlns:animations="clr-namespace:Mopups.Animations;assembly=Mopups"
+                           Title="NewsFilterPage"
+                           x:DataType="vm:NewsFilterPageViewModel">
+    <mopup:PopupPage.Animation>
+        <animations:MoveAnimation DurationIn="100"
+                                  DurationOut="100"
+                                  EasingIn="Linear"
+                                  EasingOut="Linear"
+                                  HasBackgroundAnimation="True"
+                                  PositionIn="Right"
+                                  PositionOut="Right" />
+    </mopup:PopupPage.Animation>
+
+
+    <Grid ColumnDefinitions="1.3*,8.7*" 
+          BackgroundColor="{StaticResource TranslucidBlack}"
+          ColumnSpacing="0">
+        <Grid>
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoBackCommand}" />
+            </Grid.GestureRecognizers>
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Margin="0"
+              Padding="0"
+              xe:CornerRadiusEffect.CornerRadius="8,0,8,0"
+              BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorPrimaryDark}, Light={StaticResource BackgroundColorPrimaryLight}}">
+            <Grid RowDefinitions="Auto,*,Auto">
+
+                <controls:TitleBar>
+                    <!--<controls:TitleBar.RightPanelContent>
+                        <Grid Padding="8"
+                              ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="8">
+                            <ImageButton Grid.Column="2"
+                                         Padding="4,6"
+                                         xe:TouchEffect.Command="{Binding ClearFilterCommand}"
+                                         xe:TouchEffect.Color="{DynamicResource TranslucidBlack2}"
+                                         BackgroundColor="Transparent"
+                                         CornerRadius="8"
+                                         HeightRequest="16"
+                                         IsVisible="{Binding IsNoFilterLayoutVisible, Converter={StaticResource InvertedBoolConverter}}"
+                                         Source="{Binding ResetIcon}"
+                                         WidthRequest="26" />
+                        </Grid>
+                    </controls:TitleBar.RightPanelContent>-->
+                </controls:TitleBar>
+
+                <StackLayout Grid.Row="1"
+                             HorizontalOptions="FillAndExpand"
+                             VerticalOptions="FillAndExpand"
+                             Padding="16">
+
+                    <Label Text="Content goes here"></Label>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Spacing="0"
+                             BackgroundColor="{DynamicResource Gray1}">
+                    <Label x:Name="ApplyButton"
+                           Padding="16"
+                           FontAttributes="Bold"
+                           FontSize="14"
+                           HorizontalOptions="End"
+                           Text="APPLY"
+                           TextColor="{StaticResource Primary}"
+                           TextTransform="Uppercase"
+                           VerticalOptions="Center" />
+                </StackLayout>
+
+                <!--<Grid Grid.Row="1"
+                      Grid.RowSpan="2"
+                      BackgroundColor="{DynamicResource TranslucidWhite}"
+                      HorizontalOptions="Fill"
+                      IsVisible="{Binding IsLoading}"
+                      VerticalOptions="Fill">
+                    <ActivityIndicator HeightRequest="44"
+                                       HorizontalOptions="Center"
+                                       IsRunning="true"
+                                       IsVisible="true"
+                                       VerticalOptions="Center"
+                                       WidthRequest="44"
+                                       Color="{DynamicResource AppPrimaryColor}" />
+                </Grid>-->
+            </Grid>
+        </Grid>
+    </Grid>
+</base:BasePopupContentPage>

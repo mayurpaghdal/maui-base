@@ -1,7 +1,8 @@
-﻿
+﻿using Mopups.Interfaces;
 
 namespace MauiBase.ViewModels;
-public class HomeViewModel : ChildBaseViewModel
+
+public class NewsFilterPageViewModel : BaseViewModel
 {
     private const int SUMMARY_LINKS_COUNT = 12;
 
@@ -113,19 +114,15 @@ public class HomeViewModel : ChildBaseViewModel
     #region Services
     #endregion
 
-    #region Commands
-    public IRelayCommand DoClickCommand { get; set; }
-    public IRelayCommand FilterCommand { get; set; }
-    
-    #endregion
-
     #region Ctor
-    public HomeViewModel(IBlobCache cache,
-                         IEventAggregator eventAggregator)
-        : base(eventAggregator, cache)
+    public NewsFilterPageViewModel(IBlobCache cache,
+                                   IEventAggregator eventAggregator,
+                                   IPopupNavigation popupNavigation)
+        : base(eventAggregator, popupNavigation)
     {
 
-        Title = "Home"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
+        App.Instance.ActiveVM = this;
+        Title = "News Filter"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
 
         InitCommands();
         SetResources();
@@ -135,25 +132,19 @@ public class HomeViewModel : ChildBaseViewModel
     #region Overridden Methods
     public override void InitCommands()
     {
-        DoClickCommand = new RelayCommand(() => _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish());
 
-        FilterCommand = new RelayCommand(GoToFilterPage);
     }
 
     public override void SetResources()
     {
         base.SetResources();
-        
+
     }
-     
-    public override async Task OnNavigatedTo(NavigationParameters parameters)
+
+    public override void OnNavigatedTo(NavigationParameters parameters)
     {
-        IsLoading = true;
         try
         {
-            ShowFilter = false;
-            ShowSearch = false;
-            ShowSyncIcon = false;
         }
         catch (Exception ex)
         {
@@ -161,54 +152,7 @@ public class HomeViewModel : ChildBaseViewModel
         }
         finally
         {
-            IsLoading = false;
-        }
-    }
-
-    public override async Task OnRecurringNavigatedTo(NavigationParameters parameters)
-    {
-        try
-        {
-            _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish();
-            ShowFilter = false;
-            ShowSearch = false;
-            ShowSyncIcon = false;
-        }
-        catch (Exception ex)
-        {
-            //Util.Instance.LogCrashlytics(string.Format("SessionID : {0}, Pagename : {1}, Methodname : {2}, Error :  {3}", App.SessionID, MethodBase.GetCurrentMethod().ReflectedType.FullName, MethodBase.GetCurrentMethod().Name, ex.Message), ex);
-        }
-        finally
-        {
-            //IsEmptyViewVisible = SliderNews is null || SliderNews.Count == 0;
         }
     }
     #endregion
-
-    #region Private Methods
-    private void GoToFilterPage()
-    {
-        var detail = new DetailModel
-        {
-            ID = 1,
-            Name = "Mayur",
-            Address = "Koteshwar Road",
-            City = "Motera"
-        };
-
-        var filterPage = new NewsFilterPage
-        {
-            Parameters = new NavigationParameters
-                {
-                    { "Abc", detail }
-                }
-        };
-
-        NavigateWithService(filterPage);
-
-        //GeneratePopup<ItemDetailPage>();
-        //ItemDetailPage.GenerateVM();
-    }
-    #endregion
-
 }

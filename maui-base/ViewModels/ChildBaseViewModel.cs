@@ -145,6 +145,30 @@
             });
         }
 
+        public void NavigateWithService(BasePage page)
+        {
+            RootNavigationRequested?.Invoke(this, new RootNavigationRequestedEventArgs()
+            {
+                IsAnimated = true,
+                Page = page,
+                IsChildViewNavigation = true,
+                IsBackNavigation = false,
+                NavigateWithService = true
+            });
+        }
+
+        public void NavigateWithService(BasePopupPage page)
+        {
+            RootNavigationRequested?.Invoke(this, new RootNavigationRequestedEventArgs()
+            {
+                IsAnimated = true,
+                PopupPage = page,
+                IsChildViewNavigation = true,
+                IsBackNavigation = false,
+                NavigateWithService = true
+            });
+        }
+
         public void BaseBackNavigate(NavigationParameters parameters = null!, bool isAnimated = true)
         {
             if (parameters == null)

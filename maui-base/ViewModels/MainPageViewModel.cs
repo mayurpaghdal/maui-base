@@ -1,4 +1,4 @@
-﻿using System.Diagnostics.Metrics;
+﻿using Mopups.Interfaces;
 
 namespace MauiBase.ViewModels;
 
@@ -95,13 +95,15 @@ public partial class MainPageViewModel : BaseViewModel
     #endregion
 
     #region Services
-    private readonly IEventAggregator _eventAggregator;
     #endregion
 
     #region Ctor
-    public MainPageViewModel(IEventAggregator eventAggregator)
+    public MainPageViewModel(IEventAggregator eventAggregator,
+                             IPopupNavigation popupNavigation)
+        : base(eventAggregator, popupNavigation)
     {
         _eventAggregator = eventAggregator;
+
         InitCommands();
 
         _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Subscribe(ShowMessage);
@@ -350,9 +352,15 @@ public partial class MainPageViewModel : BaseViewModel
         // Child view navigation requested.
         try
         {
-            //if (e.NavigateWithService)
-            //    await Navigation.PushAsync(e.PageName, e.Parameters);
-            //else 
+            if (e.NavigateWithService
+                && (e.Page is not null || e.PopupPage is not null))
+            {
+                if (e.Page is not null)
+                    await Navigation.PushAsync(e.Page);
+                else if (e.PopupPage is not null)
+                    await _popupNavigation.PushAsync(e.PopupPage);
+            }
+            else
             if (e.IgnoreStackInsertation)
             {
                 var currentView = navStack.FirstOrDefault(c => c.Key == CurrChildViewName);

@@ -12,7 +12,7 @@
                 <StackLayout Padding="6,8,8,8"
                              BackgroundColor="{Binding BackgroundColor, Source={x:Reference titleBar}}"
                              xe:TouchEffect.Color="{StaticResource TranslucidBlack2}" 
-                             xe:Commands.Tap="{Binding BackCommand}"
+                             xe:Commands.Tap="{Binding GoBackCommand}"
                              IsVisible="{Binding ShowBackButton, Source={x:Reference titleBar}}"
                              xe:CornerRadiusEffect.CornerRadius="8">
                     <Path Data="M6.35337 11.8527C6.15846 12.0484 5.84188 12.0489 5.64627 11.854L0.161785 6.38902C-0.0539287 6.17408 -0.0539278 5.82477 0.161785 5.60982L5.64627 0.14484C5.84188 -0.0500734 6.15846 -0.0495088 6.35337 0.1461C6.54829 0.34171 6.54772 0.658292 6.35212 0.853206L1.18753 5.99942L6.35211 11.1456C6.54772 11.3406 6.54829 11.6571 6.35337 11.8527Z"

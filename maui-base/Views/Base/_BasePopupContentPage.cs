@@ -3,7 +3,7 @@ using Mopups.Services;
 
 namespace MauiBase.Views;
 
-public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : BaseViewModel
+public partial class BasePopupContentPage<TViewModel> : BasePopupPage where TViewModel : BaseViewModel
 {
     #region Data Members
     protected bool _isLoaded = false;
@@ -15,12 +15,12 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
     #endregion
 
     #region Ctor
-    public BaseContentPage()
+    public BasePopupContentPage()
     {
         BindingContext = _vm = ServiceHelper.GetService<TViewModel>();
     }
 
-    public BaseContentPage(NavigationParameters parameters) : base()
+    public BasePopupContentPage(NavigationParameters parameters) : base()
     {
         Parameters = parameters;
     }
@@ -46,6 +46,12 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
         }
 
         _vm.OnRecurringNavigatedTo(Parameters);
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        MopupService.Instance.PopAsync();
+        return false;
     }
     #endregion
 }
