@@ -1,5 +1,10 @@
-﻿namespace MauiBase.ViewModels;
+﻿using Mopups.Animations;
+using Mopups.PreBaked.PopupPages.SingleResponse;
+using Mopups.Pages;
+using Mopups.Services;
+using Mopups.PreBaked.Services;
 
+namespace MauiBase.ViewModels;
 public class HomeViewModel : ChildBaseViewModel
 {
     private const int SUMMARY_LINKS_COUNT = 12;
@@ -114,6 +119,8 @@ public class HomeViewModel : ChildBaseViewModel
 
     #region Commands
     public IRelayCommand DoClickCommand { get; set; }
+    public IRelayCommand FilterCommand { get; set; }
+    
     #endregion
 
     #region Ctor
@@ -132,9 +139,9 @@ public class HomeViewModel : ChildBaseViewModel
     #region Overridden Methods
     public override void InitCommands()
     {
-        DoClickCommand = new RelayCommand(() => {
-            _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish();
-        });
+        DoClickCommand = new RelayCommand(() => _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish());
+
+        FilterCommand = new RelayCommand(GoToFilterPage);
     }
 
     public override void SetResources()
@@ -142,7 +149,7 @@ public class HomeViewModel : ChildBaseViewModel
         base.SetResources();
         
     }
-
+     
     public override async Task OnNavigatedTo(NavigationParameters parameters)
     {
         IsLoading = true;
@@ -179,6 +186,14 @@ public class HomeViewModel : ChildBaseViewModel
         {
             //IsEmptyViewVisible = SliderNews is null || SliderNews.Count == 0;
         }
+    }
+    #endregion
+
+    #region Private Methods
+    private void GoToFilterPage()
+    {
+        //GeneratePopup<ItemDetailPage>();
+        //ItemDetailPage.GenerateVM();
     }
     #endregion
 

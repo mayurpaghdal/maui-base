@@ -19,5 +19,10 @@
         <Button Text="Test Event Aggregation"
                 HorizontalOptions="Center"
                 Command="{Binding DoClickCommand}" />
+
+
+        <Button Text="Open Filter Page"
+        HorizontalOptions="Center"
+        Command="{Binding FilterCommand}" />
     </VerticalStackLayout>
 </controls:ChildView>
