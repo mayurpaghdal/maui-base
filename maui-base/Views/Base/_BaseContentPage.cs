@@ -1,4 +1,6 @@
 ﻿using MauiBase.Helpers;
+using Mopups.Services;
+using System.Runtime.CompilerServices;
 
 namespace MauiBase.Views;
 
@@ -8,7 +10,7 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
     protected bool _isLoaded = false;
 
     protected TViewModel _vm { get; set; }
-    internal NavigationParameters Parameters { get; set; }
+    //internal NavigationParameters Parameters { get; set; }
 
     protected event EventHandler ViewModelInitialized;
     #endregion
@@ -38,10 +40,10 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
         }
     }
 
-    public BaseContentPage(NavigationParameters parameters) : base()
-    {
-        Parameters = parameters;
-    }
+    //public BaseContentPage(NavigationParameters parameters) : base()
+    //{
+    //    Parameters = parameters;
+    //}
     #endregion
 
     #region Overridden Methods
@@ -57,14 +59,22 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
 
             //Raise Event to notify that ViewModel has been Initialized
             ViewModelInitialized?.Invoke(this, new EventArgs());
-
+            
             //Navigate to View Model's OnNavigatedTo method
-            _vm.OnNavigatedTo(Parameters);
+            _vm.OnNavigatedTo(_vm._parameters);
 
             _isLoaded = true;
         }
+        else
+            _vm.OnRecurringNavigatedTo(_vm._parameters);
 
-        _vm.OnRecurringNavigatedTo(Parameters);
+        _vm._parameters = null!;
+    }
+
+    protected override void OnDisappearing()
+    {
+        base.OnDisappearing();
+        _vm.OnNavigatedFrom(_vm._parameters);
     }
 
     protected override bool OnBackButtonPressed()

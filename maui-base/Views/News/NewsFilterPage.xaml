@@ -11,6 +11,7 @@
                       xmlns:animations="clr-namespace:Mopups.Animations;assembly=Mopups"
                       Title="NewsFilterPage"
                       Mode="ModalPopup"
+                      Shell.PresentationMode="ModalNotAnimated"
                       PopInContentDirection="RightToLeft"
                       BackgroundColor="Transparent"
                       Background="Transparent"

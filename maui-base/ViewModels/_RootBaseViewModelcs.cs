@@ -1,25 +1,16 @@
-﻿using Mopups.Interfaces;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 namespace MauiBase.ViewModels;
 
-public partial class RootBaseViewModel : ObservableObject
+public partial class RootBaseViewModel : ObservableObject, IQueryAttributable
 {
-    public delegate void SearchHandler(string searchText);
-
-    #region Services
-    internal IPopupNavigation _popupNavigation;
-    internal IEventAggregator _eventAggregator;
-    #endregion
-
-    #region Events
-    public event EventHandler<RootNavigationRequestedEventArgs> RootNavigationRequested;
-    #endregion
-
     #region Data Members
+    public delegate void SearchHandler(string searchText);
+    protected internal INavigationParameters _parameters;
     private bool _isBusy = false;
     #endregion
-
+    
     #region Properties
 
     public INavigation Navigation { get; set; }
@@ -40,62 +31,59 @@ public partial class RootBaseViewModel : ObservableObject
 
     public IDisposable _activeToastDialog = null!;
 
-    public BasePage Page { get;  internal set; }
+    public BasePage Page { get; internal set; }
 
     #endregion
 
     #region Commands
-    [RelayCommand]
-    async Task GoBack()
-    {
-
-        var isAnimated = true;
-
-        var currentVmName = this.GetType().Name;
-        if (Page is not null
-            && Page.Mode == PageMode.ModalPopup)
-        {
-            isAnimated = false;
-            await Page.PopOutAsync();
-            //await Task.Delay(100);
-        }
-
-        await Navigation.GoBackAsync(currentVmName, isAnimated);
-
-        //if (Navigation.ModalStack.Count > 0
-        //    && Navigation.ModalStack.Any(n => n.BindingContext is not null && n.BindingContext.GetType().Name.Contains(currentVmName)))
-        //{
-        //    await Navigation.PopModalAsync(isAnimated);
-        //}
-        //else if (Navigation.NavigationStack.Count > 0
-        //         && Navigation.NavigationStack.Any(n => n.BindingContext is not null && n.BindingContext.GetType().Name.Contains(currentVmName)))
-        //    await Navigation.PopAsync(isAnimated);
-    }
-
+    public IAsyncRelayCommand GoBackCommand { get; set; }
     #endregion
 
-    public RootBaseViewModel(IEventAggregator eventAggregator = null!,
-                             IPopupNavigation popupNavigation = null!)
-    {
-        _eventAggregator = eventAggregator;
-        _popupNavigation = popupNavigation;
-    }
+    #region Events
+    public event EventHandler<RootNavigationRequestedEventArgs> RootNavigationRequested;
+    #endregion
 
-    #region Methods
+    #region Services
+    internal readonly INavigationService _navigation;
+    internal readonly IEventAggregator _eventAggregator;
+    #endregion
+
+    #region Ctor
+    public RootBaseViewModel(INavigationService navigation = null!,
+                         IEventAggregator eventAggregator = null!)
+    {
+        _navigation = navigation;
+        _eventAggregator = eventAggregator;
+
+        InitCommands();
+    } 
+    #endregion
+
+    #region Public Methods
     public virtual void InitCommands()
     {
+        GoBackCommand = new AsyncRelayCommand(GoBack);
     }
 
     public virtual void SetResources()
     {
     }
 
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query is not null)
+            _parameters = new NavigationParameters(query);
+    }
+    #endregion
+
+    #region Protected Methods
     protected internal bool IsValidEmail(string email)
     {
         return Regex.IsMatch(email,
                              @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
                              RegexOptions.IgnoreCase);
     }
+    #endregion
 
     //protected void ShowForegroundToast(IUserDialogs _dialog,
     //                                 string message,
@@ -140,5 +128,27 @@ public partial class RootBaseViewModel : ObservableObject
 
     //    await _dialog.AlertAsync(message, title, "OK");
     //}
+
+    #region Private Methods
+    private async Task GoBack()
+    {
+        var isAnimated = true;
+
+        PresentationMode mode = PresentationMode.Animated;
+        try
+        {
+            mode = Shell.GetPresentationMode(Page);
+        }
+        catch { }
+
+        //var currentVmName = this.GetType().Name;
+        if (mode == PresentationMode.ModalNotAnimated)
+        {
+            isAnimated = false;
+            await Page.PopOutAsync();
+        }
+
+        await _navigation.GoBackAsync(null!, isAnimated);
+    }
+    #endregion
 }
-#endregion

@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
-using Mopups.Interfaces;
 using Mopups.Services;
 
 namespace MauiBase;
@@ -47,6 +46,7 @@ public static class MauiProgram
         //Add Platform specific Dependencies
         services.AddSingleton(Connectivity.Current);
         services.AddSingleton<IEventAggregator, EventAggregator>();
+        services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton(MopupService.Instance);
         
         //Register Cache
@@ -68,7 +68,7 @@ public static class MauiProgram
         //Register API Service
 
         //Register View Models
-        services.AddScoped<MainPageViewModel>();
+        services.AddSingleton<MainPageViewModel>();
         services.AddScoped<NewsFilterPageViewModel>();
         services.AddScoped<ItemDetailPageViewModel>();
 

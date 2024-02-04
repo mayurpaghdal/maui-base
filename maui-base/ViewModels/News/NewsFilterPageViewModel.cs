@@ -117,10 +117,9 @@ public class NewsFilterPageViewModel : BaseViewModel
     #region Ctor
     public NewsFilterPageViewModel(IBlobCache cache,
                                    IEventAggregator eventAggregator,
-                                   IPopupNavigation popupNavigation)
-        : base(eventAggregator, popupNavigation)
+                                   INavigationService navigation)
+        : base(navigation, eventAggregator)
     {
-
         App.Instance.ActiveVM = this;
         Title = "News Filter"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
 
@@ -141,7 +140,7 @@ public class NewsFilterPageViewModel : BaseViewModel
 
     }
 
-    public override void OnNavigatedTo(NavigationParameters parameters)
+    public override void OnNavigatedTo(INavigationParameters parameters)
     {
         try
         {

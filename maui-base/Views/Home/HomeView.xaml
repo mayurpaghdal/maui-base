@@ -16,9 +16,9 @@
                VerticalOptions="Center" 
                HorizontalOptions="Center" />
         
-        <Button Text="Test Event Aggregation"
+        <Button Text="Detail Page"
                 HorizontalOptions="Center"
-                Command="{Binding DoClickCommand}" />
+                Command="{Binding GoToDetailPageCommand}" />
 
 
         <Button Text="Open Filter Page"

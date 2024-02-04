@@ -1,10 +1,10 @@
 ﻿
 namespace MauiBase.Views;
-
-public partial class BasePage : ContentPage
+public interface IBasePage { }
+public partial class BasePage : ContentPage, IBasePage
 {
-    public IList<IView> PageContent => PageContentGrid.Children;
-    public IList<IView> PageIcons => PageIconsGrid.Children;
+    //public IList<IView> PageContent => PageContentGrid.Children;
+    //public IList<IView> PageIcons => PageIconsGrid.Children;
 
     public ContentPopDirection PopInContentDirection { get; set; } = ContentPopDirection.BottomToTop;
 
@@ -123,12 +123,11 @@ public partial class BasePage : ContentPage
     }
     #endregion
 
-
     public BasePage()
 	{
 		InitializeComponent();
 
-        //Hide the Xamarin Forms build in navigation header
+        //Hide the Maui build in navigation header
         NavigationPage.SetHasNavigationBar(this, false);
 
         //Set Page Mode

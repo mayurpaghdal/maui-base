@@ -15,9 +15,9 @@ public partial class BaseViewModel : RootBaseViewModel
     #endregion
 
     #region Ctor
-    public BaseViewModel(IEventAggregator eventAggregator = null!, 
-                         IPopupNavigation popupNavigation = null!)
-        : base(eventAggregator, popupNavigation)
+    public BaseViewModel(INavigationService navigation = null!,
+                         IEventAggregator eventAggregator = null!)
+        : base(navigation, eventAggregator)
     {
 
     }
@@ -29,13 +29,13 @@ public partial class BaseViewModel : RootBaseViewModel
 
     //Called on Page Appearing
     #region Navigation Methods
-    public virtual async void OnNavigatedTo(NavigationParameters parameters) =>
+    public virtual async void OnNavigatedTo(INavigationParameters parameters) =>
     await Task.CompletedTask;
 
-    public virtual async void OnRecurringNavigatedTo(NavigationParameters parameters) =>
+    public virtual async void OnRecurringNavigatedTo(INavigationParameters parameters) =>
         await Task.CompletedTask;
 
-    public virtual async void OnNavigatedFrom(NavigationParameters parameters) =>
+    public virtual async void OnNavigatedFrom(INavigationParameters parameters) =>
         await Task.CompletedTask; 
     #endregion
 }

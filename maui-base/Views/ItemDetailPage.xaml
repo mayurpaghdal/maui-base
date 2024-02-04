@@ -6,8 +6,7 @@
                        xmlns:local="clr-namespace:MauiBase.Views"
                        x:TypeArguments="vm:ItemDetailPageViewModel"
                        x:Class="MauiBase.Views.ItemDetailPage"
-                       Title="ItemDetailPage"
-                       BackgroundColor="White">
+                       Title="ItemDetailPage">
     <VerticalStackLayout x:DataType="vm:ItemDetailPageViewModel" Spacing="16" Padding="16">
         <Label Text="Welcome to .NET MAUI detail page!"
                VerticalOptions="Center" 
@@ -32,5 +31,9 @@
             <Label Text="City: " FontAttributes="Bold"/>
             <Label Text="{Binding Detail.City}" TextColor="Grey"/>
         </StackLayout>
+
+        <Button Text="Go Back" 
+                Command="{Binding GoBackCommand}"/>
+
     </VerticalStackLayout>
 </local:BaseContentPage>

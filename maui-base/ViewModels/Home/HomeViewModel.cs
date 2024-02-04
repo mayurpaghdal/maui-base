@@ -1,7 +1,7 @@
 ﻿
 
 namespace MauiBase.ViewModels;
-public class HomeViewModel : ChildBaseViewModel
+public partial class HomeViewModel : ChildBaseViewModel
 {
     private const int SUMMARY_LINKS_COUNT = 12;
 
@@ -111,20 +111,22 @@ public class HomeViewModel : ChildBaseViewModel
     #endregion
 
     #region Services
+    private readonly INavigationService _navigation;
     #endregion
 
     #region Commands
     public IRelayCommand DoClickCommand { get; set; }
     public IRelayCommand FilterCommand { get; set; }
-    
+
     #endregion
 
     #region Ctor
     public HomeViewModel(IBlobCache cache,
-                         IEventAggregator eventAggregator)
+                         IEventAggregator eventAggregator,
+                         INavigationService navigation)
         : base(eventAggregator, cache)
     {
-
+        _navigation = navigation; ;
         Title = "Home"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
 
         InitCommands();
@@ -143,9 +145,9 @@ public class HomeViewModel : ChildBaseViewModel
     public override void SetResources()
     {
         base.SetResources();
-        
+
     }
-     
+
     public override async Task OnNavigatedTo(NavigationParameters parameters)
     {
         IsLoading = true;
@@ -185,8 +187,36 @@ public class HomeViewModel : ChildBaseViewModel
     }
     #endregion
 
+    #region Command Executables
+    [RelayCommand]
+    async Task GoToDetailPage()
+    {
+        try
+        {
+            var detail = new DetailModel
+            {
+                ID = 1,
+                Name = "Mayur",
+                Address = "Koteshwar Road",
+                City = "Motera"
+            };
+
+            var n = new NavigationParameters
+            {
+                { "Abc", detail }
+            };
+
+            await _navigation.NavigateAsync(nameof(ItemDetailPage), n);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+    #endregion
+
     #region Private Methods
-    private void GoToFilterPage()
+    private async void GoToFilterPage()
     {
         var detail = new DetailModel
         {
@@ -196,18 +226,12 @@ public class HomeViewModel : ChildBaseViewModel
             City = "Motera"
         };
 
-        var filterPage = new NewsFilterPage
+        var n = new NavigationParameters
         {
-            Parameters = new NavigationParameters
-                {
-                    { "Abc", detail }
-                }
+            { "Abc", detail }
         };
 
-        NavigateWithService(filterPage, true, false);
-
-        //GeneratePopup<ItemDetailPage>();
-        //ItemDetailPage.GenerateVM();
+        await _navigation.NavigateAsync(nameof(NewsFilterPage), n, false);
     }
     #endregion
 

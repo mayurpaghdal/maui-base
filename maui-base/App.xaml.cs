@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using MauiBase.Helpers;
 
 namespace MauiBase
 {
@@ -26,7 +27,10 @@ namespace MauiBase
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+
+            var navigation = ServiceHelper.GetService<INavigationService>();
+            MainPage = new AppShell(navigation);
+            //MainPage = new NavigationPage(new MainPage());
         } 
         #endregion
     }

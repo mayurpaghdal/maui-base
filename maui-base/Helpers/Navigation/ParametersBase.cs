@@ -59,6 +59,18 @@ public abstract class ParametersBase : IParameters, IEnumerable<KeyValuePair<str
     }
 
     /// <summary>
+    /// Constructs a list of parameters.
+    /// </summary>
+    /// <param name="query">Query string to be parsed.</param>
+    protected ParametersBase(IDictionary<string, object> query)
+    {
+        if (query is null)
+            return;
+
+        _entries.AddRange(query.AsEnumerable());
+    }
+
+    /// <summary>
     /// Searches Parameter collection and returns value if Collection contains key.
     /// Otherwise returns null.
     /// </summary>

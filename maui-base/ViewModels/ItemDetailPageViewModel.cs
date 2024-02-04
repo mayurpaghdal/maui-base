@@ -1,4 +1,5 @@
-﻿namespace MauiBase.ViewModels;
+﻿
+namespace MauiBase.ViewModels;
 
 public partial class ItemDetailPageViewModel : BaseViewModel
 {
@@ -12,9 +13,11 @@ public partial class ItemDetailPageViewModel : BaseViewModel
     #endregion
 
     #region Ctor
-    public ItemDetailPageViewModel(IEventAggregator eventAggregator)
+    public ItemDetailPageViewModel(IEventAggregator eventAggregator,
+                                   INavigationService navigation)
+        : base(navigation, eventAggregator)
     {
-        _eventAggregator = eventAggregator;
+        GoBackCommand = new AsyncRelayCommand(GoBack);
     }
     #endregion
 
@@ -27,17 +30,17 @@ public partial class ItemDetailPageViewModel : BaseViewModel
     #endregion
 
     #region Overridden Methods
-    public override void OnNavigatedTo(NavigationParameters parameters)
+    public override void OnNavigatedTo(INavigationParameters parameters)
     {
         base.OnNavigatedTo(parameters);
 
-        _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish();
+        //_eventAggregator.GetEvent<NewsViewChangedEvent>()?.Publish();
 
         this.Title = "Hello World";
 
         if (parameters != null)
         {
-            if (parameters["Abc"] is DetailModel _detail)
+            if (parameters["Abcd"] is DetailModel _detail)
                 Detail = _detail;
         }
 
@@ -46,6 +49,22 @@ public partial class ItemDetailPageViewModel : BaseViewModel
     #endregion
 
     #region Private Methods
+    private async Task GoBack()
+    {
+        var detail = new DetailModel
+        {
+            ID = 1,
+            Name = "Mayur",
+            Address = "Koteshwar Road",
+            City = "Motera"
+        };
 
+        var n = new NavigationParameters
+            {
+                { "Abc", detail }
+            };
+
+        await _navigation.GoBackAsync(n);
+    }
     #endregion
 }

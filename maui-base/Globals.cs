@@ -10,6 +10,7 @@ global using MauiBase.Events;
 global using MauiBase.Extensions;
 global using MauiBase.Helpers.Navigation;
 global using MauiBase.Models;
+global using MauiBase.Services;
 global using MauiBase.ViewModels;
 global using MauiBase.Views;
 global using Mopups.Pages;

@@ -17,6 +17,8 @@ public interface INavigationParametersInternal
     //     The value of the parameter to store
     void Add(string key, object value);
 
+    void AddRange(IDictionary<string, object> parameters);
+
     //
     // Summary:
     //     Checks collection for presence of key

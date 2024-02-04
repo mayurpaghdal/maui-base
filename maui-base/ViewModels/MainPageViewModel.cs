@@ -8,11 +8,11 @@ public partial class MainPageViewModel : BaseViewModel
     #region Data Members
     private ObservableCollection<TabMenuModel> _bottomActions = [];
     private ObservableCollection<TabMenuModel> _bottomActionsLevel2 = [];
-    private List<KeyValuePair<string, NavigationParameters>> navStack = [];
+    private List<KeyValuePair<string, INavigationParameters>> navStack = [];
     private BottomAction _activeAction = BottomAction.HomeView;
     private string _currChildViewTitle;
     private IChildViewBase _currChildViewBase;
-    private NavigationParameters _parameters;
+    private INavigationParameters _parameters;
     private List<BottomAction> renderedTabs = [];
     private string _currChildViewName;
     private bool _isSkeletonVisible;
@@ -81,7 +81,7 @@ public partial class MainPageViewModel : BaseViewModel
     #region Navigation
     protected bool IsBackNavigated { get; set; }
 
-    public NavigationParameters Parameters
+    public INavigationParameters Parameters
     {
         get { return _parameters; }
         set { SetProperty(ref _parameters, value); }
@@ -99,50 +99,19 @@ public partial class MainPageViewModel : BaseViewModel
 
     #region Ctor
     public MainPageViewModel(IEventAggregator eventAggregator,
-                             IPopupNavigation popupNavigation)
-        : base(eventAggregator, popupNavigation)
+                             INavigationService navigation)
+        : base(navigation, eventAggregator)
     {
-        _eventAggregator = eventAggregator;
-
         InitCommands();
 
-        _eventAggregator.GetEvent<NewsViewChangedEvent>()?.Subscribe(ShowMessage);
+        //_eventAggregator.GetEvent<NewsViewChangedEvent>()?.Subscribe(ShowMessage);
     }
 
-    private void ShowMessage()
-    {
-        //Title = $"Things changed {++counter}";
-    }
+   
     #endregion
 
     #region Command Executables
-    [RelayCommand]
-    async Task GoToDetailPage()
-    {
-        try
-        {
-            var detail = new DetailModel
-            {
-                ID = 1,
-                Name = "Mayur",
-                Address = "Koteshwar Road",
-                City = "Motera"
-            };
-
-            var detailPage = new ItemDetailPage
-            {
-                Parameters = new NavigationParameters
-                {
-                    { "Abc", detail }
-                }
-            };
-            await Navigation.PushAsync(detailPage, false);
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
+    
     #endregion
 
     #region Overridden Methods
@@ -152,7 +121,7 @@ public partial class MainPageViewModel : BaseViewModel
         SwitchViewCommand = new RelayCommand<TabMenuModel>(SwitchView);
     }
 
-    public override async void OnNavigatedTo(NavigationParameters parameters)
+    public override async void OnNavigatedTo(INavigationParameters parameters)
     {
         this.Title = "App";
 
@@ -297,16 +266,24 @@ public partial class MainPageViewModel : BaseViewModel
         }
     }
 
-    public override void OnRecurringNavigatedTo(NavigationParameters parameters)
+    public override void OnRecurringNavigatedTo(INavigationParameters parameters)
     {
         base.OnRecurringNavigatedTo(parameters);
+
+        if (parameters is not null)
+        {
+            DetailModel newDetailModel;
+
+            if (parameters["Abcd"] is DetailModel _detail)
+                newDetailModel = _detail;
+        }
     }
     #endregion
 
     #region Private Methods
     private void NavigateToInternalView(string pageName,
-                                            bool ignoreNavigationStackInsert = false,
-                                            NavigationParameters parameters = null!)
+                                        bool ignoreNavigationStackInsert = false,
+                                        INavigationParameters parameters = null!)
     {
         try
         {
@@ -326,7 +303,7 @@ public partial class MainPageViewModel : BaseViewModel
             if (ignoreNavigationStackInsert == false
                 && !pagesToIgnore.Contains($"^{CurrChildViewName}^"))
             {
-                navStack.Add(new KeyValuePair<string, NavigationParameters>(CurrChildViewName, Parameters));
+                navStack.Add(new KeyValuePair<string, INavigationParameters>(CurrChildViewName, Parameters));
             }
             App.CurrentBottomAction = (BottomAction)System.Enum.Parse(typeof(BottomAction), CurrChildViewName);
         }
@@ -445,10 +422,10 @@ public partial class MainPageViewModel : BaseViewModel
         try
         {
             var currentView = navStack.FirstOrDefault(t => t.Key == CurrChildViewName);
-            if (!string.IsNullOrWhiteSpace(currentView.Key) && navStack.Count > 1)
-            {
+            
+            if (!string.IsNullOrWhiteSpace(currentView.Key) 
+                && navStack.Count > 1)
                 navStack.Remove(currentView);
-            }
 
             var lastPage = navStack.LastOrDefault();
 
@@ -456,7 +433,7 @@ public partial class MainPageViewModel : BaseViewModel
                 (!string.IsNullOrEmpty(lastPage.Key) && CurrChildViewName.Equals(lastPage.Key)))
             {
                 if (App.Instance.ActiveChildVM.GoBackCommand != null)
-                    await App.Instance.ActiveChildVM.GoBackCommand.ExecuteAsync(null!);
+                    await App.Instance.ActiveChildVM.GoBackCommand?.ExecuteAsync(null!)!;
             }
             else
             {
@@ -475,6 +452,11 @@ public partial class MainPageViewModel : BaseViewModel
             //Utils.Util.Instance.LogCrashlytics(string.Format("SessionID : {0}, Pagename : {1}, Methodname : {2}, Error :  {3}", App.SessionID, MethodBase.GetCurrentMethod().ReflectedType.FullName, MethodBase.GetCurrentMethod().Name, ex.Message), ex);
             // _log.Crashlytics(MethodBase.GetCurrentMethod().ReflectedType.FullName, MethodBase.GetCurrentMethod().Name, App.Instance.SessionID, ex.Message, ex);
         }
+    }
+
+    private void ShowMessage()
+    {
+        //Title = $"Things changed {++counter}";
     }
     #endregion
 }
