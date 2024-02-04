@@ -1,6 +1,6 @@
 namespace MauiBase.Views;
 
-public partial class NewsFilterPage : BasePopupContentPage<NewsFilterPageViewModel>
+public partial class NewsFilterPage : BaseContentPage<NewsFilterPageViewModel>
 {
 	public NewsFilterPage()
 	{

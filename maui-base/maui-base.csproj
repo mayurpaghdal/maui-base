@@ -106,11 +106,11 @@
     </ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Views\Base\BasePopupPage.xaml.cs">
-	    <DependentUpon>BasePopupPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Views\Base\BasePage.xaml.cs">
 	    <DependentUpon>BasePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\News\NewsFilterPage.xaml.cs">
+	    <DependentUpon>NewsFilterPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\News\NewsView.xaml.cs">
 	    <DependentUpon>NewsView.xaml</DependentUpon>
@@ -122,9 +122,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\TitleBar.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Base\BasePopupPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Base\BasePage.xaml">

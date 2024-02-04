@@ -24,5 +24,14 @@ public enum PageMode
     None,
     Menu,
     Navigate,
-    Modal
+    Modal,
+    ModalPopup
+}
+
+public enum ContentPopDirection
+{
+    LeftToRight,
+    RightToLeft,
+    TopToBottom,
+    BottomToTop
 }
