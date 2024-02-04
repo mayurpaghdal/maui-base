@@ -204,7 +204,7 @@ public class HomeViewModel : ChildBaseViewModel
                 }
         };
 
-        NavigateWithService(filterPage);
+        NavigateWithService(filterPage, true, false);
 
         //GeneratePopup<ItemDetailPage>();
         //ItemDetailPage.GenerateVM();

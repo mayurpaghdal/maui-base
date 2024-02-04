@@ -145,27 +145,16 @@
             });
         }
 
-        public void NavigateWithService(BasePage page)
+        public void NavigateWithService(BasePage page, bool isModalNavigation = false, bool isAnimated = true)
         {
             RootNavigationRequested?.Invoke(this, new RootNavigationRequestedEventArgs()
             {
-                IsAnimated = true,
+                IsAnimated = isAnimated,
                 Page = page,
                 IsChildViewNavigation = true,
                 IsBackNavigation = false,
-                NavigateWithService = true
-            });
-        }
-
-        public void NavigateWithService(BasePopupPage page)
-        {
-            RootNavigationRequested?.Invoke(this, new RootNavigationRequestedEventArgs()
-            {
-                IsAnimated = true,
-                PopupPage = page,
-                IsChildViewNavigation = true,
-                IsBackNavigation = false,
-                NavigateWithService = true
+                NavigateWithService = true,
+                IsModalNavigation = isModalNavigation
             });
         }
 

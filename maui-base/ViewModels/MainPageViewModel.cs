@@ -136,7 +136,7 @@ public partial class MainPageViewModel : BaseViewModel
                     { "Abc", detail }
                 }
             };
-            await Navigation.PushAsync(detailPage, true);
+            await Navigation.PushAsync(detailPage, false);
         }
         catch (Exception ex)
         {
@@ -353,15 +353,14 @@ public partial class MainPageViewModel : BaseViewModel
         try
         {
             if (e.NavigateWithService
-                && (e.Page is not null || e.PopupPage is not null))
+                && e.Page is not null)
             {
-                if (e.Page is not null)
-                    await Navigation.PushAsync(e.Page);
-                else if (e.PopupPage is not null)
-                    await _popupNavigation.PushAsync(e.PopupPage);
+                if (e.IsModalNavigation)
+                    await Navigation.PushModalAsync(e.Page, e.IsAnimated);
+                else
+                    await Navigation.PushAsync(e.Page, e.IsAnimated);
             }
-            else
-            if (e.IgnoreStackInsertation)
+            else if (e.IgnoreStackInsertation)
             {
                 var currentView = navStack.FirstOrDefault(c => c.Key == CurrChildViewName);
                 if (!string.IsNullOrEmpty(currentView.Key) && navStack.Count > 1)

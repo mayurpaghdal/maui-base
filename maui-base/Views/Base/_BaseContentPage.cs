@@ -1,5 +1,4 @@
 ﻿using MauiBase.Helpers;
-using Mopups.Services;
 
 namespace MauiBase.Views;
 
@@ -18,6 +17,25 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
     public BaseContentPage()
     {
         BindingContext = _vm = ServiceHelper.GetService<TViewModel>();
+        this.Loaded += BaseContentPage_Loaded;
+    }
+
+    private void BaseContentPage_Loaded(object? sender, EventArgs e)
+    {
+        if (Mode == PageMode.ModalPopup)
+        {
+            BackgroundColor = Colors.Black.WithAlpha(0f);
+            Background = new SolidColorBrush(Colors.Black.WithAlpha(0f));
+
+            var navPage = (this as NavigationPage)!;
+
+            if (navPage is not null)
+            {
+                navPage.BackgroundColor = Colors.Black.WithAlpha(0f);
+                navPage.Background = new SolidColorBrush(Colors.Black.WithAlpha(0f));
+            }
+            PopIn(Easing.CubicInOut);
+        }
     }
 
     public BaseContentPage(NavigationParameters parameters) : base()
@@ -35,6 +53,7 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
             base.OnAppearing();
 
             _vm.Navigation = this.Navigation;
+            _vm.Page = this;
 
             //Raise Event to notify that ViewModel has been Initialized
             ViewModelInitialized?.Invoke(this, new EventArgs());
@@ -46,6 +65,23 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
         }
 
         _vm.OnRecurringNavigatedTo(Parameters);
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        if (Mode == PageMode.ModalPopup)
+        {
+            GoBackAsync();
+            return true;
+        }
+        return base.OnBackButtonPressed();
+    }
+    #endregion
+
+    #region Protected Methods
+    protected async void GoBackAsync()
+    {
+        await _vm.GoBackCommand?.ExecuteAsync(false)!;
     }
     #endregion
 }

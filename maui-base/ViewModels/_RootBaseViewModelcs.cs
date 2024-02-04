@@ -40,27 +40,36 @@ public partial class RootBaseViewModel : ObservableObject
 
     public IDisposable _activeToastDialog = null!;
 
+    public BasePage Page { get;  internal set; }
+
     #endregion
 
     #region Commands
     [RelayCommand]
     async Task GoBack()
     {
-        //Specific for Popup navigation.
-        if (_popupNavigation is not null
-            && _popupNavigation.PopupStack.Count > 0)
+
+        var isAnimated = true;
+
+        var currentVmName = this.GetType().Name;
+        if (Page is not null
+            && Page.Mode == PageMode.ModalPopup)
         {
-            await _popupNavigation.PopAsync();
-            return;
+            isAnimated = false;
+            await Page.PopOutAsync();
+            //await Task.Delay(100);
         }
 
-        if (Navigation.ModalStack.Count > 0)
-        {
-            if (Navigation.ModalStack.Count > 0)
-                await Navigation.PopModalAsync();
-        }
-        else if (Navigation.NavigationStack.Count > 0)
-            await Navigation.PopAsync();
+        await Navigation.GoBackAsync(currentVmName, isAnimated);
+
+        //if (Navigation.ModalStack.Count > 0
+        //    && Navigation.ModalStack.Any(n => n.BindingContext is not null && n.BindingContext.GetType().Name.Contains(currentVmName)))
+        //{
+        //    await Navigation.PopModalAsync(isAnimated);
+        //}
+        //else if (Navigation.NavigationStack.Count > 0
+        //         && Navigation.NavigationStack.Any(n => n.BindingContext is not null && n.BindingContext.GetType().Name.Contains(currentVmName)))
+        //    await Navigation.PopAsync(isAnimated);
     }
 
     #endregion
