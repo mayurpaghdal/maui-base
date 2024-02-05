@@ -36,10 +36,7 @@
         <Button Text="Go Back" 
                 Command="{Binding GoBackCommand}"/>
 
-        <skia:SKLottieView Source="no-data.json" 
-                           RepeatCount="6"
-                           HeightRequest="200"
-                           WidthRequest="200"
-                           HorizontalOptions="Center"/>
+        <skia:SKLottieView Source="no_data.json" 
+                           Style="{StaticResource LottieBaseStyle}"/>
     </VerticalStackLayout>
 </local:BaseContentPage>

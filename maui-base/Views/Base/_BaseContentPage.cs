@@ -14,7 +14,13 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
     public BaseContentPage()
     {
         BindingContext = _vm = ServiceHelper.GetService<TViewModel>();
+        this.Loaded += BaseContentPage_Loaded;
+    }
+    #endregion
 
+    #region Events
+    private void BaseContentPage_Loaded(object? sender, EventArgs e)
+    {
         if (_vm is not null)
         {
             try
@@ -24,13 +30,7 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
             }
             catch { }
         }
-        this.Loaded += BaseContentPage_Loaded;
-    }
-    #endregion
 
-    #region Events
-    private void BaseContentPage_Loaded(object? sender, EventArgs e)
-    {
         if (_vm.PagePresentationMode == PresentationMode.ModalNotAnimated)
         {
             BackgroundColor = Colors.Black.WithAlpha(0f);

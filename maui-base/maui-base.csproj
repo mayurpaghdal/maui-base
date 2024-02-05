@@ -93,7 +93,7 @@
 	  <None Remove="Resources\Images\tab_presence_black.png" />
 	  <None Remove="Resources\Images\tab_setting_black.png" />
 	  <None Remove="Resources\Images\user_icon.png" />
-	  <None Remove="Resources\Raw\no-data.json.json" />
+	  <None Remove="Resources\Raw\no_data.json" />
 	</ItemGroup>
 
 	<ItemGroup>
