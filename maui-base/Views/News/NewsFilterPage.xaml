@@ -23,7 +23,7 @@
           ColumnSpacing="0">
         <Grid>
             <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding GoBackCommand}" CommandParameter="{x:Boolean False}" />
+                <TapGestureRecognizer Command="{Binding GoBackCommand}" />
             </Grid.GestureRecognizers>
         </Grid>
 

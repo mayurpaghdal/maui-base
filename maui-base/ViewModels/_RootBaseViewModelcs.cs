@@ -7,13 +7,12 @@ public partial class RootBaseViewModel : ObservableObject, IQueryAttributable
 {
     #region Data Members
     public delegate void SearchHandler(string searchText);
-    protected internal INavigationParameters _parameters;
     private bool _isBusy = false;
     #endregion
-    
+
     #region Properties
 
-    public INavigation Navigation { get; set; }
+    protected internal INavigationParameters NavParameters { get; set; }
 
     public bool IsBusy
     {
@@ -33,6 +32,7 @@ public partial class RootBaseViewModel : ObservableObject, IQueryAttributable
 
     public BasePage Page { get; internal set; }
 
+    public PresentationMode PagePresentationMode {get;internal set;}
     #endregion
 
     #region Commands
@@ -50,7 +50,7 @@ public partial class RootBaseViewModel : ObservableObject, IQueryAttributable
 
     #region Ctor
     public RootBaseViewModel(INavigationService navigation = null!,
-                         IEventAggregator eventAggregator = null!)
+                             IEventAggregator eventAggregator = null!)
     {
         _navigation = navigation;
         _eventAggregator = eventAggregator;
@@ -62,7 +62,7 @@ public partial class RootBaseViewModel : ObservableObject, IQueryAttributable
     #region Public Methods
     public virtual void InitCommands()
     {
-        GoBackCommand = new AsyncRelayCommand(GoBack);
+        GoBackCommand = new AsyncRelayCommand(NavigateBack);
     }
 
     public virtual void SetResources()
@@ -72,7 +72,7 @@ public partial class RootBaseViewModel : ObservableObject, IQueryAttributable
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
         if (query is not null)
-            _parameters = new NavigationParameters(query);
+            NavParameters = new NavigationParameters(query);
     }
     #endregion
 
@@ -130,22 +130,16 @@ public partial class RootBaseViewModel : ObservableObject, IQueryAttributable
     //}
 
     #region Private Methods
-    private async Task GoBack()
+    internal async Task NavigateBack()
     {
         var isAnimated = true;
 
-        PresentationMode mode = PresentationMode.Animated;
-        try
-        {
-            mode = Shell.GetPresentationMode(Page);
-        }
-        catch { }
-
-        //var currentVmName = this.GetType().Name;
-        if (mode == PresentationMode.ModalNotAnimated)
+        //Call page's custom Pop out method if Modal is not animated.
+        if (PagePresentationMode == PresentationMode.ModalNotAnimated)
         {
             isAnimated = false;
             await Page.PopOutAsync();
+            //await Task.Delay(50);
         }
 
         await _navigation.GoBackAsync(null!, isAnimated);

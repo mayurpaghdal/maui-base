@@ -17,16 +17,12 @@ public partial class ItemDetailPageViewModel : BaseViewModel
                                    INavigationService navigation)
         : base(navigation, eventAggregator)
     {
-        GoBackCommand = new AsyncRelayCommand(GoBack);
+        GoBackCommand = new AsyncRelayCommand(GoBackAsync);
     }
     #endregion
 
     #region Command Executables
-    [RelayCommand]
-    async Task GoToDetailPage()
-    {
-        //await Navigation.PushAsync(new VideoDetailsPage(videoID));
-    }
+    
     #endregion
 
     #region Overridden Methods
@@ -40,7 +36,7 @@ public partial class ItemDetailPageViewModel : BaseViewModel
 
         if (parameters != null)
         {
-            if (parameters["Abcd"] is DetailModel _detail)
+            if (parameters["Abc"] is DetailModel _detail)
                 Detail = _detail;
         }
 
@@ -49,7 +45,7 @@ public partial class ItemDetailPageViewModel : BaseViewModel
     #endregion
 
     #region Private Methods
-    private async Task GoBack()
+    private async Task GoBackAsync()
     {
         var detail = new DetailModel
         {
@@ -61,7 +57,7 @@ public partial class ItemDetailPageViewModel : BaseViewModel
 
         var n = new NavigationParameters
             {
-                { "Abc", detail }
+                { "Abcd", detail }
             };
 
         await _navigation.GoBackAsync(n);

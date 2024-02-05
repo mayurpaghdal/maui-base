@@ -1,6 +1,4 @@
-﻿using Mopups.Interfaces;
-
-namespace MauiBase.ViewModels;
+﻿namespace MauiBase.ViewModels;
 
 public partial class MainPageViewModel : BaseViewModel
 {
@@ -107,11 +105,11 @@ public partial class MainPageViewModel : BaseViewModel
         //_eventAggregator.GetEvent<NewsViewChangedEvent>()?.Subscribe(ShowMessage);
     }
 
-   
+
     #endregion
 
     #region Command Executables
-    
+
     #endregion
 
     #region Overridden Methods
@@ -191,7 +189,7 @@ public partial class MainPageViewModel : BaseViewModel
             if (parameters != null)
             {
                 //CrossFirebaseCrashlytics.Current.Log("NI: if (parameters != null) OnNavigatedTo MPVM" + DateTime.Now);
-                //NavigationMode navMode = Navigation.NavigationMode.New;
+                Common.NavigationMode navMode = _navigation.Mode;
                 //try
                 //{
                 //    navMode = parameters.GetNavigationMode();
@@ -326,17 +324,10 @@ public partial class MainPageViewModel : BaseViewModel
     /// <param name="e"></param>
     private async void RootNavigationFromChildViewRequested(object sender, RootNavigationRequestedEventArgs e)
     {
-        // Child view navigation requested.
         try
         {
-            if (e.NavigateWithService
-                && e.Page is not null)
-            {
-                if (e.IsModalNavigation)
-                    await Navigation.PushModalAsync(e.Page, e.IsAnimated);
-                else
-                    await Navigation.PushAsync(e.Page, e.IsAnimated);
-            }
+            if (e.NavigateWithService)
+                await _navigation.NavigateAsync(e.PageName, e.Parameters, e.IsAnimated);
             else if (e.IgnoreStackInsertation)
             {
                 var currentView = navStack.FirstOrDefault(c => c.Key == CurrChildViewName);
@@ -373,13 +364,10 @@ public partial class MainPageViewModel : BaseViewModel
                         NavigateToInternalView(e.PageName, ignoreStackInsertation, e.Parameters);
                 }
             }
-            //CrossFirebaseCrashlytics.Current.Log("NI:E try RootNavigationFromChildViewRequested MPVM" + DateTime.Now);
         }
         catch (Exception ex)
         {
             //Debug.WriteLine(ex.Message);
-            //Utils.Util.Instance.LogCrashlytics(string.Format("SessionID : {0}, Pagename : {1}, Methodname : {2}, Error :  {3}", App.SessionID, MethodBase.GetCurrentMethod().ReflectedType.FullName, MethodBase.GetCurrentMethod().Name, ex.Message), ex);
-            //_log.Crashlytics(MethodBase.GetCurrentMethod().ReflectedType.FullName, MethodBase.GetCurrentMethod().Name, App.Instance.SessionID, ex.Message, ex);
         }
     }
 
@@ -422,8 +410,8 @@ public partial class MainPageViewModel : BaseViewModel
         try
         {
             var currentView = navStack.FirstOrDefault(t => t.Key == CurrChildViewName);
-            
-            if (!string.IsNullOrWhiteSpace(currentView.Key) 
+
+            if (!string.IsNullOrWhiteSpace(currentView.Key)
                 && navStack.Count > 1)
                 navStack.Remove(currentView);
 

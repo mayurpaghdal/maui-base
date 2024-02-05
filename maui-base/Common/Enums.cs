@@ -13,10 +13,33 @@ public enum BottomAction
     SettingsView = 99
 }
 
+public enum ContentPopDirection
+{
+    LeftToRight,
+    RightToLeft,
+    TopToBottom,
+    BottomToTop
+}
+
 public enum DisplayMode
 {
     NoNavigationBar,
     NavigationBar
+}
+
+/// <summary>
+/// Indicates about the navigation operation that has been invoked.
+/// </summary>
+public enum NavigationMode
+{
+    /// <summary>
+    /// Indicates that a navigation operation occured that resulted in navigating backwards in the navigation stack.
+    /// </summary>
+    Back,
+    /// <summary>
+    /// Indicates that a new navigation operation has occured and a new page has been added to the navigation stack.
+    /// </summary>
+    New
 }
 
 public enum PageMode
@@ -26,12 +49,4 @@ public enum PageMode
     Navigate,
     Modal,
     ModalPopup
-}
-
-public enum ContentPopDirection
-{
-    LeftToRight,
-    RightToLeft,
-    TopToBottom,
-    BottomToTop
 }

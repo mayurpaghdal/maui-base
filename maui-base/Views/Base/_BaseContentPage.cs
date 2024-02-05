@@ -54,27 +54,32 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
         {
             base.OnAppearing();
 
-            _vm.Navigation = this.Navigation;
             _vm.Page = this;
+            try
+            {
+                _vm.PagePresentationMode = Shell.GetPresentationMode(this);
+            }
+            catch { }
 
             //Raise Event to notify that ViewModel has been Initialized
             ViewModelInitialized?.Invoke(this, new EventArgs());
-            
+
             //Navigate to View Model's OnNavigatedTo method
-            _vm.OnNavigatedTo(_vm._parameters);
+            _vm.OnNavigatedTo(_vm.NavParameters);
 
             _isLoaded = true;
         }
         else
-            _vm.OnRecurringNavigatedTo(_vm._parameters);
+            _vm.OnRecurringNavigatedTo(_vm.NavParameters);
 
-        _vm._parameters = null!;
+        _vm.NavParameters = null!;
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        _vm.OnNavigatedFrom(_vm._parameters);
+        _vm.OnNavigatedFrom(_vm.NavParameters);
+        //_vm.OnRecurringNavigatedTo(_vm.NavParameters);
     }
 
     protected override bool OnBackButtonPressed()
