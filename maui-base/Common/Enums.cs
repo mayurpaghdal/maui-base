@@ -41,12 +41,3 @@ public enum NavigationMode
     /// </summary>
     New
 }
-
-public enum PageMode
-{
-    None,
-    Menu,
-    Navigate,
-    Modal,
-    ModalPopup
-}

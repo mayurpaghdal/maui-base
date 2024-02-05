@@ -1,7 +1,6 @@
 ﻿#if ANDROID
 using Android.Views;
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
-using Microsoft.Maui.Controls.Platform;
 using AV = Android.Views;
 using View = Android.Views.View;
 #endif
@@ -11,7 +10,7 @@ using UIKit;
 using Microsoft.Maui.Controls.Compatibility.Platform.iOS;
 #endif
 
-using Microsoft.Maui.Platform;
+using Microsoft.Maui.Controls.Platform;
 using MC = Microsoft.Maui.Controls;
 using System.Windows.Input;
 
@@ -216,10 +215,10 @@ public class CommandEffectPlatform : PlatformEffect
 }
 #endif
 
-#if iOS
+#if IOS
 public class CommandsPlatform : PlatformEffect
 {
-    public UIKit.UIView View => Control ?? Container;
+    public UIView View => Control ?? Container;
 
     DateTime _tapTime;
     ICommand _tapCommand;
