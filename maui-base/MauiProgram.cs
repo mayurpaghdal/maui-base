@@ -21,17 +21,18 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             })
             .UseMauiCompatibility()
+            .UseMauiExtenders()
             .ConfigureMauiHandlers(handlers =>
             {
                 //handlers.AddCompatibilityRenderer(typeof(TouchRoutingEffect), typeof(TouchEffectPlatform));
             })
-            .ConfigureEffects(effects =>
-            {
-                effects.Add<TouchRoutingEffect, TouchEffectPlatform>(); 
-                effects.Add<IconTintColorRoutingEffect, IconTintColorEffectPlatform>(); 
-                effects.Add<CommandsRoutingEffect, CommandEffectPlatform>();
-                effects.Add<RoundRoutingEffect, RoundEffectPlatform>();
-            })
+            //.ConfigureEffects(effects =>
+            //{
+            //    effects.Add<TouchRoutingEffect, TouchEffectPlatform>(); 
+            //    effects.Add<IconTintColorRoutingEffect, IconTintColorEffectPlatform>(); 
+            //    effects.Add<CommandsRoutingEffect, CommandEffectPlatform>();
+            //    effects.Add<RoundRoutingEffect, RoundEffectPlatform>();
+            //})
             .ConfigureMopups();
 
 #if DEBUG

@@ -3,7 +3,7 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:vm="clr-namespace:MauiBase.ViewModels"
                        xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                       xmlns:xe="clr-namespace:MauiBase.Effects"
+                       xmlns:xe="http://schemas.maui-extended.com/extenders"
                        xmlns:common="clr-namespace:MauiBase.Common"
                        xmlns:local="clr-namespace:MauiBase.Views"
                        xmlns:m="clr-namespace:MauiBase.Models"
@@ -83,7 +83,7 @@
                                              x:DataType="m:TabMenuModel"
                                              BackgroundColor="Transparent"
                                              Padding="8"
-                                             xe:RoundEffect.CornerRadius="8">
+                                             xe:CornerRadiusEffect.CornerRadius="8">
                                     <Grid HeightRequest="20">
                                         <Image Source="{Binding Icon}">
                                             <Image.Triggers>

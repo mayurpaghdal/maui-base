@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.DependencyInjection;
+using MauiBase.BackgroundServices;
 using MauiBase.Helpers;
 
 namespace MauiBase
@@ -20,6 +21,7 @@ namespace MauiBase
         public bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
         public BaseViewModel ActiveVM { get; set; } = null!;
         public ChildBaseViewModel ActiveChildVM { get; set; } = null!;
+        public static int IntervalCounter { get; internal set; }
 
         #endregion
 
@@ -31,7 +33,16 @@ namespace MauiBase
             var navigation = ServiceHelper.GetService<INavigationService>();
             MainPage = new AppShell(navigation);
             //MainPage = new NavigationPage(new MainPage());
-        } 
+        }
         #endregion
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            //Start BG services
+            BackgroundTaskService.Add(() => new CounterBackgroundService());
+            BackgroundTaskService.Start();
+        }
     }
 }
