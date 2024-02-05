@@ -4,6 +4,7 @@
                        xmlns:vm="clr-namespace:MauiBase.ViewModels"
                        xmlns:m="clr-namespace:MauiBase.Models"
                        xmlns:local="clr-namespace:MauiBase.Views"
+                       xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
                        x:TypeArguments="vm:ItemDetailPageViewModel"
                        x:Class="MauiBase.Views.ItemDetailPage"
                        Title="ItemDetailPage">
@@ -35,5 +36,10 @@
         <Button Text="Go Back" 
                 Command="{Binding GoBackCommand}"/>
 
+        <skia:SKLottieView Source="no-data.json" 
+                           RepeatCount="6"
+                           HeightRequest="200"
+                           WidthRequest="200"
+                           HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </local:BaseContentPage>

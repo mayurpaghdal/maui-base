@@ -93,6 +93,7 @@
 	  <None Remove="Resources\Images\tab_presence_black.png" />
 	  <None Remove="Resources\Images\tab_setting_black.png" />
 	  <None Remove="Resources\Images\user_icon.png" />
+	  <None Remove="Resources\Raw\no-data.json.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -103,6 +104,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.6" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Mopups" Version="1.3.0" />
+		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0-preview.86" />
     </ItemGroup>
 
 	<ItemGroup>

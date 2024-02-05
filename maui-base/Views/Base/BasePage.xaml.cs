@@ -3,9 +3,6 @@ namespace MauiBase.Views;
 public interface IBasePage { }
 public partial class BasePage : ContentPage, IBasePage
 {
-    //public IList<IView> PageContent => PageContentGrid.Children;
-    //public IList<IView> PageIcons => PageIconsGrid.Children;
-
     public ContentPopDirection PopInContentDirection { get; set; } = ContentPopDirection.BottomToTop;
 
     protected bool IsBackButtonEnabled
@@ -37,53 +34,6 @@ public partial class BasePage : ContentPage, IBasePage
             basePage.TitleLabel.IsVisible = true;
         }
     }
-
-    public static readonly BindableProperty ModeProperty = BindableProperty.Create(
-        nameof(Mode),
-        typeof(PageMode),
-        typeof(BasePage),
-        PageMode.Navigate,
-        propertyChanged: OnPageModePropertyChanged);
-
-    public PageMode Mode
-    {
-        get => (PageMode)GetValue(ModeProperty);
-        set => SetValue(ModeProperty, value);
-    }
-
-    private static void OnPageModePropertyChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        if (bindable != null && bindable is BasePage basePage)
-            basePage.SetPageMode((PageMode)newValue);
-    }
-
-    private void SetPageMode(PageMode pageMode)
-    {
-        switch (pageMode)
-        {
-            case PageMode.Menu:
-                HamburgerButton.IsVisible = true;
-                NavigateBackButton.IsVisible = false;
-                CloseButton.IsVisible = false;
-                break;
-            case PageMode.Navigate:
-                HamburgerButton.IsVisible = false;
-                NavigateBackButton.IsVisible = true;
-                CloseButton.IsVisible = false;
-                break;
-            case PageMode.Modal:
-                HamburgerButton.IsVisible = false;
-                NavigateBackButton.IsVisible = false;
-                CloseButton.IsVisible = true;
-                break;
-            default:
-                HamburgerButton.IsVisible = false;
-                NavigateBackButton.IsVisible = false;
-                CloseButton.IsVisible = false;
-                break;
-        }
-    }
-
 
     public static readonly BindableProperty DisplayModeProperty = BindableProperty.Create(
         nameof(DisplayMode),
@@ -129,9 +79,6 @@ public partial class BasePage : ContentPage, IBasePage
 
         //Hide the Maui build in navigation header
         NavigationPage.SetHasNavigationBar(this, false);
-
-        //Set Page Mode
-        SetPageMode(PageMode.None);
 
         //Set Content Display Mode
         SetDisplayMode(DisplayMode.NoNavigationBar);

@@ -1,5 +1,4 @@
 ﻿using System.Text.RegularExpressions;
-using System.Windows.Input;
 
 namespace MauiBase.ViewModels;
 
@@ -139,7 +138,6 @@ public partial class RootBaseViewModel : ObservableObject, IQueryAttributable
         {
             isAnimated = false;
             await Page.PopOutAsync();
-            //await Task.Delay(50);
         }
 
         await _navigation.GoBackAsync(null!, isAnimated);

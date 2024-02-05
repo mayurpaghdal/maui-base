@@ -2,6 +2,7 @@
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
 using Mopups.Services;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MauiBase;
 
@@ -13,6 +14,7 @@ public static class MauiProgram
         builder
             .UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+            .UseSkiaSharp()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
