@@ -46,6 +46,7 @@ public static class MauiProgram
             {
 #if ANDROID
                 handlers.AddHandler(typeof(CustomEntry), typeof(CustomEntryHandler));
+                handlers.AddHandler(typeof(CustomDatePicker), typeof(CustomDatePickerHandler));
 #elif IOS
                 handlers.AddHandler(typeof(CustomEntry), typeof(CustomEntryHandler));
 #endif       

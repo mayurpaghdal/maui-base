@@ -84,6 +84,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\drawable\dialog_bg.xml" />
 	  <None Remove="Resources\Images\delete_icon.png" />
 	  <None Remove="Resources\Images\icon_bookmark_black.png" />
 	  <None Remove="Resources\Images\icon_bookmark_black_filled.png" />
@@ -170,6 +171,12 @@
 	<ItemGroup>
 	  <Folder Include="Platforms\Android\Renderers\" />
 	  <Folder Include="Platforms\iOS\Renderers\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\dialog_bg.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
 	</ItemGroup>
 
 </Project>

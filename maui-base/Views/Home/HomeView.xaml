@@ -36,12 +36,6 @@
                Style="{StaticResource Headline}"
                VerticalOptions="Center" 
                Padding="6"
-               BackgroundColor="Orange"
-               me:TouchEffect.Color="{StaticResource TranslucidBlack2}"
                HorizontalOptions="Center" />
-
-        <Entry me:CornerRadiusEffect.CornerRadius="19"
-               BackgroundColor="Yellow"
-               Placeholder="Enter something"/>
     </VerticalStackLayout>
 </controls:ChildView>

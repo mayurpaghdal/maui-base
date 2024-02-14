@@ -2,7 +2,6 @@
 using Android.Graphics.Drawables;
 using Android.Util;
 using AndroidX.AppCompat.Widget;
-using Microsoft.Maui.Controls.Platform;
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
 
@@ -19,11 +18,13 @@ public class CustomEntryHandler : EntryHandler
 
     public static PropertyMapper<CustomEntry, CustomEntryHandler> PropertyMapper = new(ViewHandler.ViewMapper)
     {
-        [nameof(CustomEntry.Text)] = MapText,
-        [nameof(CustomEntry.TextColor)] = MapTextColor,
-        [nameof(CustomEntry.BorderColor)] = MapBorder,
-        [nameof(CustomEntry.BorderWidth)] = MapBorder,
-        [nameof(CustomEntry.CornerRadius)] = MapBorder
+        [nameof(CustomEntry.Text)] = MapControl,
+        [nameof(CustomEntry.TextColor)] = MapControl,
+        [nameof(CustomEntry.BorderColor)] = MapControl,
+        [nameof(CustomEntry.BorderWidth)] = MapControl,
+        [nameof(CustomEntry.CornerRadius)] = MapControl,
+        [nameof(CustomEntry.Padding)] = MapControl,
+        [nameof(CustomEntry.IsEnabled)] = MapControl
     };
 
     #region Protected Methods
@@ -86,7 +87,7 @@ public class CustomEntryHandler : EntryHandler
         // Perform any native view cleanup here
         platformView.Dispose();
         base.DisconnectHandler(platformView);
-    } 
+    }
     #endregion
 
     #region Private Methods
@@ -99,6 +100,28 @@ public class CustomEntryHandler : EntryHandler
     private static void MapTextColor(CustomEntryHandler handler, CustomEntry view)
     {
         handler.PlatformView?.SetTextColor(view.TextColor.ToPlatform());
+    }
+
+    private static void MapControl(CustomEntryHandler handler, CustomEntry entry)
+    {
+        MapBorder(handler, entry);
+        MapPadding(handler, entry);
+        MapText(handler, entry);
+        MapTextColor(handler, entry);
+
+        handler.PlatformView.Enabled = entry.IsEnabled;
+    }
+
+    private static void MapPadding(CustomEntryHandler handler, CustomEntry entry)
+    {
+        var padLeft = DpToPixels(handler.Context, (float)entry.Padding.Left);
+        var padTop = DpToPixels(handler.Context, (float)entry.Padding.Top);
+        var padRight = DpToPixels(handler.Context, (float)entry.Padding.Right);
+        var padBottom = DpToPixels(handler.Context, (float)entry.Padding.Bottom);
+
+        handler.PlatformView?.SetPadding((int)padLeft, (int)padTop, (int)padRight, (int)padBottom);
+
+        MapBorder(handler, entry);
     }
 
     private static void MapBorder(CustomEntryHandler handler, CustomEntry view)
@@ -114,8 +137,7 @@ public class CustomEntryHandler : EntryHandler
         _gradientBackground.SetCornerRadius(
             DpToPixels(handler.PlatformView.Context!, Convert.ToSingle(view.CornerRadius)));
 
-        // set the background of the   
-        handler.PlatformView.SetBackground(_gradientBackground);
+        handler.PlatformView.Background = _gradientBackground;
     }
 
     private static float DpToPixels(Context context, float valueInDp)
@@ -125,6 +147,6 @@ public class CustomEntryHandler : EntryHandler
 
         var metrics = context.Resources?.DisplayMetrics!;
         return TypedValue.ApplyDimension(ComplexUnitType.Dip, valueInDp, metrics);
-    } 
+    }
     #endregion
 }

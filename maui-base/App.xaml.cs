@@ -22,7 +22,6 @@ namespace MauiBase
         public BaseViewModel ActiveVM { get; set; } = null!;
         public ChildBaseViewModel ActiveChildVM { get; set; } = null!;
         public static int IntervalCounter { get; internal set; }
-
         #endregion
 
         #region Ctor

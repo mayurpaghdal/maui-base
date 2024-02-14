@@ -41,6 +41,18 @@ namespace MauiBase.Controls
         }
         #endregion
 
+        #region Padding
+        public static readonly BindableProperty PaddingProperty =
+        BindableProperty.Create(nameof(Padding),
+            typeof(Thickness), typeof(CustomEntry), new Thickness(8,2));
+
+        // Gets or sets Padding value  
+        public Thickness Padding
+        {
+            get => (Thickness)GetValue(PaddingProperty);
+            set => SetValue(PaddingProperty, value);
+        }
+        #endregion
 
         #region CornerRadius
         public static readonly BindableProperty CornerRadiusProperty =
@@ -54,18 +66,6 @@ namespace MauiBase.Controls
             get => (double)GetValue(CornerRadiusProperty);
             set => SetValue(CornerRadiusProperty, value);
         }
-        #endregion
-
-        #region IsCurvedCornersEnabled
-        public static readonly BindableProperty IsCurvedCornersEnabledProperty =
-        BindableProperty.Create(nameof(IsCurvedCornersEnabled),
-            typeof(bool), typeof(CustomEntry), true);
-        // Gets or sets IsCurvedCornersEnabled value  
-        public bool IsCurvedCornersEnabled
-        {
-            get => (bool)GetValue(IsCurvedCornersEnabledProperty);
-            set => SetValue(IsCurvedCornersEnabledProperty, value);
-        } 
         #endregion
     }
 }

@@ -6,7 +6,8 @@
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="MauiBase.Views.BasePage">
     <ContentPage.Behaviors>
-        <mct:StatusBarBehavior StatusBarColor="{AppThemeBinding Dark={StaticResource BackgroundColorPrimaryDark}, Light={StaticResource BackgroundColorPrimaryLight}}" />
+        <mct:StatusBarBehavior StatusBarColor="{AppThemeBinding Dark={StaticResource BackgroundColorPrimaryDark}, Light={StaticResource BackgroundColorPrimaryLight}}" 
+                               StatusBarStyle="{AppThemeBinding Dark=LightContent, Light=DarkContent}"/>
     </ContentPage.Behaviors>
 
 </ContentPage>

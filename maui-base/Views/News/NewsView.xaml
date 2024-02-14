@@ -9,7 +9,14 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
-        <controls:CustomEntry  />
+        <controls:CustomEntry  IsEnabled="True" Text="IIoo"/>
         <controls:CustomEntry  IsEnabled="False" Text="Hello"/>
+
+        <controls:SkeletonView Color="{AppThemeBinding Dark={StaticResource BackgroundColorSecondaryDark}, Light={StaticResource BackgroundColorSecondaryLight}}"
+                               HeightRequest="22" CornerRadius="6" />
+        <controls:SkeletonView Color="{AppThemeBinding Dark={StaticResource BackgroundColorSecondaryDark}, Light={StaticResource BackgroundColorSecondaryLight}}"
+                               HeightRequest="22" WidthRequest="300" CornerRadius="4" />
+
+        <controls:CustomDatePicker IsEnabled="True"/>
     </VerticalStackLayout>
 </controls:ChildView>

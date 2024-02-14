@@ -16,11 +16,12 @@ public class CustomEntryHandler : EntryHandler
 
     public static PropertyMapper<CustomEntry, CustomEntryHandler> PropertyMapper = new(ViewHandler.ViewMapper)
     {
-        [nameof(CustomEntry.Text)] = MapText,
-        [nameof(CustomEntry.TextColor)] = MapTextColor,
-        [nameof(CustomEntry.BorderColor)] = MapBorder,
-        [nameof(CustomEntry.BorderWidth)] = MapBorder,
-        [nameof(CustomEntry.CornerRadius)] = MapBorder
+        [nameof(CustomEntry.Text)] = MapControl,
+        [nameof(CustomEntry.TextColor)] = MapControl,
+        [nameof(CustomEntry.BorderColor)] = MapControl,
+        [nameof(CustomEntry.BorderWidth)] = MapControl,
+        [nameof(CustomEntry.CornerRadius)] = MapControl,
+        [nameof(CustomEntry.Padding)] = MapControl
     };
 
 
@@ -88,14 +89,23 @@ public class CustomEntryHandler : EntryHandler
     #endregion
 
     #region Private Methods
+    private static void MapControl(CustomEntryHandler handler, CustomEntry entry)
+    {
+        MapBorder(handler, entry);
+        MapText(handler, entry);
+        MapTextColor(handler, entry);
+
+        handler.PlatformView.Enabled = entry.IsEnabled;
+    }
     private static void MapBorder(CustomEntryHandler handler, CustomEntry view)
     {
-        handler.PlatformView.LeftView = new UIView(new CGRect(0f, 0f, 9f, 20f));
+        handler.PlatformView.LeftView = new UIView(new CGRect(0f, 0f, (float)view.Padding.Left, handler.PlatformView.Frame.Height));
         handler.PlatformView.LeftViewMode = UITextFieldViewMode.Always;
+        handler.PlatformView.RightView = new UIView(new CGRect(0f, 0f, (float)view.Padding.Right, handler.PlatformView.Frame.Height));
+        handler.PlatformView.RightViewMode = UITextFieldViewMode.Always;
 
         handler.PlatformView.KeyboardAppearance = UIKeyboardAppearance.Dark;
         handler.PlatformView.ReturnKeyType = UIReturnKeyType.Done;
-
         // Radius for the curves  
         handler.PlatformView.Layer.CornerRadius = Convert.ToSingle(view.CornerRadius);
         // Thickness of the Border Color  
