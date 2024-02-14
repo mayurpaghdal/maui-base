@@ -3,10 +3,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:controls="clr-namespace:MauiBase.Controls"
                     x:Class="MauiBase.Views.NewsView">
-    <VerticalStackLayout>
+    <VerticalStackLayout Margin="16" Spacing="10">
         <Label 
             Text="Welcome to .NET MAUI this is News page.!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <controls:CustomEntry  />
+        <controls:CustomEntry  IsEnabled="False" Text="Hello"/>
     </VerticalStackLayout>
 </controls:ChildView>

@@ -1,4 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
+﻿#if ANDROID
+using MauiBase.Platforms.Android.Handlers;
+#elif IOS
+using MauiBase.Platforms.iOS.Handlers;
+#endif
+
+using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Compatibility.Hosting;
 using Mopups.Hosting;
 using Mopups.Services;
@@ -22,17 +28,36 @@ public static class MauiProgram
             })
             .UseMauiCompatibility()
             .UseMauiExtenders()
+            //            .ConfigureLifecycleEvents(events =>
+            //            {
+            //#if IOS
+            //                events.AddiOS(iOSbuilder =>
+
+            //                    iOSbuilder.FinishedLaunching((app, lanchOptions) =>
+            //                    {
+            //                        BackgroundAggregator.Init(app.Delegate);
+            //                        return false;
+            //                    })
+            //                );
+            //#endif
+
+            //            })
             .ConfigureMauiHandlers(handlers =>
             {
+#if ANDROID
+                handlers.AddHandler(typeof(CustomEntry), typeof(CustomEntryHandler));
+#elif IOS
+                handlers.AddHandler(typeof(CustomEntry), typeof(CustomEntryHandler));
+#endif       
                 //handlers.AddCompatibilityRenderer(typeof(TouchRoutingEffect), typeof(TouchEffectPlatform));
             })
-            //.ConfigureEffects(effects =>
-            //{
-            //    effects.Add<TouchRoutingEffect, TouchEffectPlatform>(); 
-            //    effects.Add<IconTintColorRoutingEffect, IconTintColorEffectPlatform>(); 
-            //    effects.Add<CommandsRoutingEffect, CommandEffectPlatform>();
-            //    effects.Add<RoundRoutingEffect, RoundEffectPlatform>();
-            //})
+            .ConfigureEffects(effects =>
+            {
+                //effects.Add<TouchRoutingEffect, TouchEffectPlatform>();
+                //effects.Add<CommandsRoutingEffect, CommandEffectPlatform>();
+                //effects.Add<IconTintColorRoutingEffect, IconTintColorEffectPlatform>();
+                //effects.Add<RoundRoutingEffect, RoundEffectPlatform>();
+            })
             .ConfigureMopups();
 
 #if DEBUG
@@ -51,7 +76,7 @@ public static class MauiProgram
         services.AddSingleton<IEventAggregator, EventAggregator>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton(MopupService.Instance);
-        
+
         //Register Cache
         #region Cache Registration
         Akavache.Registrations.Start("MauiBase");
@@ -65,7 +90,7 @@ public static class MauiProgram
         catch { }
 
         services.AddSingleton(cache);
-        services.AddSingleton(secureCache); 
+        services.AddSingleton(secureCache);
         #endregion
 
         //Register API Service
