@@ -96,6 +96,7 @@
 	  <None Remove="Resources\Images\icon_heart_black.png" />
 	  <None Remove="Resources\Images\icon_heart_black_filled.png" />
 	  <None Remove="Resources\Images\icon_link_redirect_dark_grey.png" />
+	  <None Remove="Resources\Images\icon_m365.svg" />
 	  <None Remove="Resources\Images\icon_news_grey.png" />
 	  <None Remove="Resources\Images\icon_news_hr_grey.png" />
 	  <None Remove="Resources\Images\icon_new_news_identifier.png" />
@@ -121,6 +122,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="Resources\Images\icon_m365.svg"  BaseSize="40,40" />
+		<MauiImage Update="Resources\Images\tab_alert_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_directory_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_home_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_info_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_more_black.png" BaseSize="20,6" />
+		<MauiImage Update="Resources\Images\tab_news_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_presence_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_setting_black.png" BaseSize="20,20" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="akavache" Version="9.1.20" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
@@ -133,8 +146,20 @@
     </ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="ShellPage.xaml.cs">
+	    <DependentUpon>ShellPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Account\LoginPage.xaml.cs">
+	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Base\BasePage.xaml.cs">
 	    <DependentUpon>BasePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Home\HomePage.xaml.cs">
+	    <DependentUpon>HomePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\News\NewsPage.xaml.cs">
+	    <DependentUpon>NewsPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\News\NewsFilterPage.xaml.cs">
 	    <DependentUpon>NewsFilterPage.xaml</DependentUpon>
@@ -145,13 +170,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="ShellPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\PopupView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\TitleBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Account\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Base\BasePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Home\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\News\NewsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\News\NewsFilterPage.xaml">

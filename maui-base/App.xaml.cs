@@ -30,7 +30,8 @@ namespace MauiBase
             InitializeComponent();
 
             var navigation = ServiceHelper.GetService<INavigationService>();
-            MainPage = new AppShell(navigation);
+            var events = ServiceHelper.GetService<IEventAggregator>();
+            MainPage = new ShellPage(navigation, events);
             //MainPage = new NavigationPage(new MainPage());
         }
         #endregion

@@ -622,4 +622,12 @@
         <Setter Property="HeightRequest" Value="200" />
         <Setter Property="HorizontalOptions" Value="Fill" />
     </Style>
+
+    <Style x:Key="SeparatorRectangleStyle" TargetType="Rectangle">
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="HeightRequest" Value="2" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="Fill" Value="{AppThemeBinding Dark={StaticResource TranslucidWhite1}, Light={StaticResource TranslucidBlack2}}" />
+    </Style>
 </ResourceDictionary>

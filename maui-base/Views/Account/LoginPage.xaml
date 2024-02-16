@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:vm="clr-namespace:MauiBase.ViewModels"
+                       xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                       xmlns:me="http://schemas.maui-extended.com/extenders"
+                       xmlns:common="clr-namespace:MauiBase.Common"
+                       xmlns:local="clr-namespace:MauiBase.Views"
+                       xmlns:m="clr-namespace:MauiBase.Models"
+                       xmlns:controls="clr-namespace:MauiBase.Controls"
+                       x:TypeArguments="vm:LoginPageViewModel"
+                       x:DataType="vm:LoginPageViewModel"
+                       x:Class="MauiBase.Views.LoginPage"
+                       x:Name="mainRoot">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid VerticalOptions="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout Margin="20" HorizontalOptions="Center"
+                VerticalOptions="EndAndExpand" Spacing="0">
+
+                <Label Text="Welcome to"
+                       HorizontalOptions="Center" 
+                       Style="{StaticResource SubHeadline}"
+                       Opacity="0.75"/>
+
+                <Label Text="bs one: companion"
+                       HorizontalOptions="Center"
+                       FontSize="24"
+                       Margin="0,-6,0,0"
+                       TextColor="{StaticResource Primary}"/>
+            </StackLayout>
+
+            <Grid x:Name="viewSingUp" Grid.Row="1" VerticalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+               
+                <Grid Grid.Row="1"
+                      Padding="30,20"
+                      me:CornerRadiusEffect.CornerRadius="10"
+                      Opacity="0.8" HorizontalOptions="Center"
+                      Background="{AppThemeBinding Dark={StaticResource BackgroundColorSecondaryDark}, Light={StaticResource BackgroundColorSecondaryLight}}"
+                      Margin="24,16" 
+                      RowSpacing="15">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="4"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Text="Sign in using Microsoft account" 
+                           HorizontalOptions="Center"  FontSize="18"
+                           Style="{StaticResource SubHeadline}"/>
+
+                    <StackLayout Grid.Row="1"  Orientation="Horizontal" Spacing="10"
+                                 HorizontalOptions="Center" 
+                                 BackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorTertiaryDark}, Light={StaticResource BackgroundColorTertiaryLight}}"
+                                 Padding="12,8"
+                                 me:Commands.Tap="{Binding InitiateMsLoginCommand}"
+                                 me:CornerRadiusEffect.CornerRadius="8"
+                                 me:TouchEffect.Color="{StaticResource TranslucidBlack2}">
+                        <Image Source="{x:Static common:IconKey.M365}" AutomationProperties.Name="Slice" 
+                               HeightRequest="24" WidthRequest="24" Aspect="Fill"/>
+                        <Label Text="Work or school account" 
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <Grid Grid.Row="2" ColumnSpacing="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle  Margin="0,3,0,2" 
+                                    Style="{StaticResource SeparatorRectangleStyle}" />
+
+                        <Label Text="OR" Grid.Column="1"/>
+
+                        <Rectangle Margin="0,3,0,2" Grid.Column="2"
+                                   Style="{StaticResource SeparatorRectangleStyle}"/>
+                    </Grid>
+
+                    <StackLayout Grid.Row="3"  Orientation="Horizontal" Spacing="10"
+                                 HorizontalOptions="Center" 
+                                 BackgroundColor="{StaticResource Primary}"
+                                 Padding="20,8"
+                                 me:CornerRadiusEffect.CornerRadius="8"
+                                 me:TouchEffect.Color="{StaticResource TranslucidBlack2}">
+                        <Label Text="Sign up" FontSize="16"
+                               VerticalOptions="Center"/>
+                    </StackLayout>
+
+                    <ProgressBar Grid.Row="4" VerticalOptions="Start" IsEnabled="True" 
+                                 Margin="-80,0,-80,0"
+                                 IsVisible="{Binding IsBusy}" />
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!--<Image Source="logo" 
+               HorizontalOptions="Center" 
+               VerticalOptions="End"
+               Height="40"
+               Aspect="AspectFill"
+               Margin="0,15"
+               Grid.Row="2"
+               IsVisible="{Binding IsAZGroupViewVisisble}"/>-->
+    </Grid>
+</local:BaseContentPage>

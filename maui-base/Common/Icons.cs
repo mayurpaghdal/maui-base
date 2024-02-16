@@ -22,6 +22,7 @@ public struct IconKey
     public const string EYE_HALF_BLACK = "icon_eye_half_black";
 
     public const string NEW_NEWS_IDENTIFIER = "icon_new_news_identifier";
+    public const string M365 = "icon_M365";
 
 
     public const string TAB_HOME_BLACK = "tab_home_black";
