@@ -124,7 +124,7 @@ public class LoginPageViewModel : BaseViewModel
         : base(navigation, eventAggregator)
     {
         
-        Title = "News"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
+        Title = "Login"; // _resourceHelper.GetLabelTextByLabelName(homePage.Label);
 
         InitCommands();
         SetResources();
@@ -141,8 +141,7 @@ public class LoginPageViewModel : BaseViewModel
     {
         try
         {
-            await _navigation.NavigateAsync(nameof(MainPage));
-            _eventAggregator.GetEvent<ToggleTabBarEvent>()?.Publish(true);
+            await _navigation.NavigateAsync($"//{nameof(UserInitializePage)}");
         }
         catch (Exception ex)
         {

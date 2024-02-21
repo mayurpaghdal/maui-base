@@ -36,7 +36,10 @@
     <MauiXaml Update="Controls\TitleBar.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Views\Account\LoginPage.xaml">
+    <MauiXaml Update="Views\User\UserInitializePage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Views\User\LoginPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Views\Base\BasePage.xaml">

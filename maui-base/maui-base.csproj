@@ -118,11 +118,12 @@
 	  <None Remove="Resources\Images\tab_presence_black.png" />
 	  <None Remove="Resources\Images\tab_setting_black.png" />
 	  <None Remove="Resources\Images\user_icon.png" />
-	  <None Remove="Resources\Raw\no_data.json" />
+	  <None Remove="Resources\Raw\anim_app_config.json" />
+	  <None Remove="Resources\Raw\anim_no_data.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Remove="Resources\Images\icon_m365.svg"  BaseSize="40,40" />
+		<None Remove="Resources\Images\icon_m365.svg" BaseSize="40,40" />
 		<MauiImage Update="Resources\Images\tab_alert_black.png" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\tab_directory_black.png" BaseSize="20,20" />
 		<MauiImage Update="Resources\Images\tab_home_black.png" BaseSize="20,20" />
@@ -149,7 +150,10 @@
 	  <Compile Update="ShellPage.xaml.cs">
 	    <DependentUpon>ShellPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Account\LoginPage.xaml.cs">
+	  <Compile Update="Views\User\UserInitializePage.xaml.cs">
+	    <DependentUpon>UserInitializePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\User\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Base\BasePage.xaml.cs">
@@ -179,7 +183,10 @@
 	  <MauiXaml Update="Controls\TitleBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Account\LoginPage.xaml">
+	  <MauiXaml Update="Views\User\UserInitializePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\User\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Base\BasePage.xaml">

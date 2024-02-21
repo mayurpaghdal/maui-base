@@ -99,6 +99,7 @@ public static class MauiProgram
         //Register View Models
         services.AddSingleton<MainPageViewModel>();
         services.AddScoped<LoginPageViewModel>();
+        services.AddScoped<UserInitializePageViewModel>();
         services.AddScoped<HomePageViewModel>();
         services.AddScoped<NewsPageViewModel>();
         services.AddScoped<NewsFilterPageViewModel>();

@@ -1,49 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="MauiBase.ShellPage"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MauiBase.Views"
-    xmlns:common="clr-namespace:MauiBase.Common"
-    Shell.FlyoutBehavior="Disabled"
-    Shell.NavBarIsVisible="False"
-    Shell.TabBarIsVisible="False"
-    Shell.TabBarBackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorSecondaryDark}, Light={StaticResource BackgroundColorSecondaryLight}}"
-    Shell.TabBarForegroundColor="{StaticResource Primary}"
-    Shell.PresentationMode="Animated"
-    Shell.TabBarUnselectedColor="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}"
-    Title="MauiBase">
+<Shell x:Class="MauiBase.ShellPage"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:MauiBase.Views"
+       xmlns:common="clr-namespace:MauiBase.Common"
+       Shell.FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarBackgroundColor="{AppThemeBinding Dark={StaticResource BackgroundColorSecondaryDark}, Light={StaticResource BackgroundColorSecondaryLight}}"
+       Shell.TabBarForegroundColor="{StaticResource Primary}"
+       Shell.PresentationMode="Animated"
+       Shell.TabBarUnselectedColor="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}"
+       Title="MauiBase">
 
-    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}"
-                  Route="LoginPage" />
-    
-    <TabBar>
-        <ShellContent Title="Home"
-                      Icon="{x:Static common:IconKey.TAB_HOME_BLACK}"
-                      ContentTemplate="{DataTemplate local:HomePage}"
-                      Route="HomePage" />
-        <ShellContent Title="News"
-                      Icon="{x:Static common:IconKey.TAB_NEWS_BLACK}"
-                      ContentTemplate="{DataTemplate local:NewsPage}" 
-                      Route="NewsPage"/>
-        <ShellContent Title="Directory" Icon="{x:Static common:IconKey.TAB_DIRECTORY_BLACK}"
-              ContentTemplate="{DataTemplate local:MainPage}" 
-              Route="MainPage"/>
-        <ShellContent Title="Activities" Icon="{x:Static common:IconKey.TAB_ACTIVITIES_BLACK}"
-              ContentTemplate="{DataTemplate local:ItemDetailPage}" 
-              Route="ItemDetailPage2"/>
-        <ShellContent Title="Absences" Icon="{x:Static common:IconKey.TAB_PRESENCE_BLACK}"
+    <TabBar Route="LoginPage">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+    </TabBar>
+
+    <TabBar Route="HomePage">
+        <Tab>
+            <ShellContent Title="Home"
+                          Icon="{x:Static common:IconKey.TAB_HOME_BLACK}"
+                          ContentTemplate="{DataTemplate local:HomePage}"
+                           />
+        </Tab>
+        <Tab>
+            <ShellContent Title="News"
+                          Icon="{x:Static common:IconKey.TAB_NEWS_BLACK}"
+                          ContentTemplate="{DataTemplate local:NewsPage}" 
+                          Route="NewsPage"/>
+        </Tab>
+        <Tab>
+            <ShellContent Title="Directory" Icon="{x:Static common:IconKey.TAB_DIRECTORY_BLACK}"
+                          ContentTemplate="{DataTemplate local:MainPage}" 
+                          Route="MainPage"/>
+        </Tab>
+        <Tab>
+            <ShellContent Title="Activities" Icon="{x:Static common:IconKey.TAB_ACTIVITIES_BLACK}"
+                          ContentTemplate="{DataTemplate local:ItemDetailPage}" 
+                          Route="ItemDetailPage2"/>
+        </Tab>
+        <Tab>
+            <ShellContent Title="Absences" Icon="{x:Static common:IconKey.TAB_PRESENCE_BLACK}"
               ContentTemplate="{DataTemplate local:ItemDetailPage}" 
               Route="ItemDetailPage3"/>
-        <ShellContent Title="Notifications" Icon="{x:Static common:IconKey.TAB_ALERT_BLACK}"
+        </Tab>
+        <Tab>
+            <ShellContent Title="Notifications" Icon="{x:Static common:IconKey.TAB_ALERT_BLACK}"
               ContentTemplate="{DataTemplate local:ItemDetailPage}" 
               Route="ItemDetailPage4"/>
-        <ShellContent Title="Pages" Icon="{x:Static common:IconKey.BOOKMARK_BLACK_FILLED}"
+        </Tab>
+        <Tab>
+            <ShellContent Title="Pages" Icon="{x:Static common:IconKey.BOOKMARK_BLACK_FILLED}"
               ContentTemplate="{DataTemplate local:ItemDetailPage}" 
               Route="ItemDetailPage5"/>
-        <ShellContent Title="Settings" Icon="{x:Static common:IconKey.TAB_SETTING_BLACK}"
+        </Tab>
+        <Tab>
+            <ShellContent Title="Settings" Icon="{x:Static common:IconKey.TAB_SETTING_BLACK}"
               ContentTemplate="{DataTemplate local:ItemDetailPage}" 
               Route="ItemDetailPage6"/>
+        </Tab>
     </TabBar>
 
 </Shell>
