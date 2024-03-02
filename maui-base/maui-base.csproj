@@ -38,6 +38,10 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>-->
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
+	  <ProvisioningType>manual</ProvisioningType>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -57,10 +61,30 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Helpers\Navigation\NavigationService.cs" />
+	  <AndroidResource Remove="Effects\**" />
+	  <AndroidResource Remove="Interfaces\**" />
+	  <Compile Remove="Effects\**" />
+	  <Compile Remove="Interfaces\**" />
+	  <EmbeddedResource Remove="Effects\**" />
+	  <EmbeddedResource Remove="Interfaces\**" />
+	  <MauiCss Remove="Effects\**" />
+	  <MauiCss Remove="Interfaces\**" />
+	  <MauiXaml Remove="Effects\**" />
+	  <MauiXaml Remove="Interfaces\**" />
+	  <None Remove="Effects\**" />
+	  <None Remove="Interfaces\**" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Controls\CustomSearchBar.cs" />
+	  <Compile Remove="Helpers\Navigation\NavigationService.cs" />
+	  <Compile Remove="Platforms\Android\Renderers\CustomEntryRenderer.cs" />
+	  <Compile Remove="Platforms\Android\Renderers\CustomSearchBarRenderer.cs" />
+	  <Compile Remove="Platforms\Android\Renderers\ExtendedWebViewRenderer.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\drawable\dialog_bg.xml" />
 	  <None Remove="Resources\Images\delete_icon.png" />
 	  <None Remove="Resources\Images\icon_bookmark_black.png" />
 	  <None Remove="Resources\Images\icon_bookmark_black_filled.png" />
@@ -72,6 +96,7 @@
 	  <None Remove="Resources\Images\icon_heart_black.png" />
 	  <None Remove="Resources\Images\icon_heart_black_filled.png" />
 	  <None Remove="Resources\Images\icon_link_redirect_dark_grey.png" />
+	  <None Remove="Resources\Images\icon_m365.svg" />
 	  <None Remove="Resources\Images\icon_news_grey.png" />
 	  <None Remove="Resources\Images\icon_news_hr_grey.png" />
 	  <None Remove="Resources\Images\icon_new_news_identifier.png" />
@@ -93,21 +118,52 @@
 	  <None Remove="Resources\Images\tab_presence_black.png" />
 	  <None Remove="Resources\Images\tab_setting_black.png" />
 	  <None Remove="Resources\Images\user_icon.png" />
+	  <None Remove="Resources\Raw\anim_app_config.json" />
+	  <None Remove="Resources\Raw\anim_no_data.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Images\icon_m365.svg" BaseSize="40,40" />
+		<MauiImage Update="Resources\Images\tab_alert_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_directory_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_home_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_info_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_more_black.png" BaseSize="20,6" />
+		<MauiImage Update="Resources\Images\tab_news_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_presence_black.png" BaseSize="20,20" />
+		<MauiImage Update="Resources\Images\tab_setting_black.png" BaseSize="20,20" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="akavache" Version="9.1.20" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.6" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.6" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.7" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.7" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Mopups" Version="1.3.0" />
+		<PackageReference Include="Plugin.Maui.Extender" Version="1.0.7" />
+		<PackageReference Include="SkiaSharp.Extended.UI.Maui" Version="2.0.0-preview.86" />
     </ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="ShellPage.xaml.cs">
+	    <DependentUpon>ShellPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\User\UserInitializePage.xaml.cs">
+	    <DependentUpon>UserInitializePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\User\LoginPage.xaml.cs">
+	    <DependentUpon>LoginPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Base\BasePage.xaml.cs">
 	    <DependentUpon>BasePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Home\HomePage.xaml.cs">
+	    <DependentUpon>HomePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\News\NewsPage.xaml.cs">
+	    <DependentUpon>NewsPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\News\NewsFilterPage.xaml.cs">
 	    <DependentUpon>NewsFilterPage.xaml</DependentUpon>
@@ -118,13 +174,28 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="ShellPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\PopupView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Controls\TitleBar.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\User\UserInitializePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\User\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Base\BasePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Home\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\News\NewsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\News\NewsFilterPage.xaml">
@@ -142,17 +213,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Interfaces\" />
-	</ItemGroup>
-
-	<ItemGroup Condition="'$(TargetFramework)' == 'net8.0-ios'">
-	  <PackageReference Include="FreakyEffects">
-	    <Version>0.1.0</Version>
-	  </PackageReference>
+	  <Folder Include="Platforms\Android\Renderers\" />
+	  <Folder Include="Platforms\iOS\Renderers\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\maui-base.events\maui-base.events.csproj" />
+	  <AndroidResource Update="Platforms\Android\Resources\drawable\dialog_bg.xml">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </AndroidResource>
 	</ItemGroup>
 
 </Project>

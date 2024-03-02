@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <?xaml-comp compile="true" ?>
-<ResourceDictionary 
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:MauiBase.Controls"
-    xmlns:xe="clr-namespace:MauiBase.Effects">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:controls="clr-namespace:MauiBase.Controls"
+                    xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI">
 
     <!-- Colors -->
     <Color x:Key="PageBackgroundColor">#262626</Color>
@@ -296,6 +295,59 @@
         </Setter>
     </Style>
 
+    <Style TargetType="controls:CustomEntry">
+        <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource TextColorPrimaryDark}, Light={StaticResource TextColorPrimaryLight}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource BackgroundColorTertiaryDark}, Light={StaticResource BackgroundColorSecondaryLight}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Dark={StaticResource BackgroundColorTertiaryDark}, Light={StaticResource BackgroundColorTertiaryLight}}" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="PlaceholderColor" Value="{AppThemeBinding Dark={StaticResource TextColorTertiaryDark}, Light={StaticResource TextColorTertiaryLight}}" />
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
+                            <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:CustomDatePicker">
+        <Setter Property="TextColor" Value="{AppThemeBinding Dark={StaticResource TextColorPrimaryDark}, Light={StaticResource TextColorPrimaryLight}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark={StaticResource BackgroundColorTertiaryDark}, Light={StaticResource BackgroundColorSecondaryLight}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Dark={StaticResource BackgroundColorTertiaryDark}, Light={StaticResource BackgroundColorTertiaryLight}}" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="FontFamily" Value="OpenSansRegular"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="MinimumWidthRequest" Value="44"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Disabled">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}" />
+                            <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
     <Style TargetType="Frame">
         <Setter Property="HasShadow" Value="False" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
@@ -564,4 +616,18 @@
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
+    <Style TargetType="skia:SKLottieView" x:Key="LottieBaseStyle">
+        <Setter Property="RepeatCount" Value="-1" />
+        <Setter Property="Margin" Value="26,0" />
+        <Setter Property="HeightRequest" Value="200" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+    </Style>
+
+    <Style x:Key="SeparatorRectangleStyle" TargetType="Rectangle">
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="HeightRequest" Value="2" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="Fill" Value="{AppThemeBinding Dark={StaticResource TranslucidWhite1}, Light={StaticResource TranslucidBlack2}}" />
+    </Style>
 </ResourceDictionary>

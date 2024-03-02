@@ -3,7 +3,7 @@
                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                        xmlns:vm="clr-namespace:MauiBase.ViewModels"
                        xmlns:xct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                       xmlns:xe="clr-namespace:MauiBase.Effects"
+                       xmlns:me="http://schemas.maui-extended.com/extenders"
                        xmlns:common="clr-namespace:MauiBase.Common"
                        xmlns:local="clr-namespace:MauiBase.Views"
                        xmlns:m="clr-namespace:MauiBase.Models"
@@ -13,7 +13,7 @@
                        x:Class="MauiBase.Views.MainPage"
                        x:DataType="vm:MainPageViewModel"
                        x:Name="mainRoot">
-
+    <!--xmlns:xe="clr-namespace:MauiBase.Effects"-->
     <Grid RowDefinitions="Auto, *, Auto" RowSpacing="0">
 
         <controls:TitleBar ShowBackButton="False"/>
@@ -21,7 +21,7 @@
         <!--- CONTENT PRESENTER -->
         <Grid Grid.Row="1"
               BackgroundColor="{AppThemeBinding Dark={StaticResource Black}, Light={StaticResource White}}"
-              xe:CornerRadiusEffect.CornerRadius="16,16,0,0">
+              me:CornerRadiusEffect.CornerRadius="16,16,0,0">
             <controls:ChildPageControl Margin="0"
                                        x:Name="presenter"
                                        ChildViewName="{Binding CurrChildViewName, Mode=TwoWay}"
@@ -74,24 +74,24 @@
                             <Style TargetType="Image">
                                 <Setter Property="HeightRequest" Value="20" />
                                 <Setter Property="VerticalOptions" Value="Center" />
-                                <Setter Property="xe:IconTintColorEffect.Color" Value="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}" />
+                                <Setter Property="me:IconTintColorEffect.Color" Value="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}" />
                             </Style>
                         </FlexLayout.Resources>
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <StackLayout xe:TouchEffect.Color="{StaticResource TranslucidBlack2}" 
+                                <StackLayout me:TouchEffect.Color="{StaticResource TranslucidBlack2}" 
                                              x:DataType="m:TabMenuModel"
                                              BackgroundColor="Transparent"
                                              Padding="8"
-                                             xe:RoundEffect.CornerRadius="8">
+                                             me:CornerRadiusEffect.CornerRadius="8">
                                     <Grid HeightRequest="20">
                                         <Image Source="{Binding Icon}">
                                             <Image.Triggers>
                                                 <DataTrigger TargetType="Image" Binding="{Binding IsActive}" Value="true">
-                                                    <Setter Property="xe:IconTintColorEffect.Color" Value="{StaticResource Primary}" />
+                                                    <Setter Property="me:IconTintColorEffect.Color" Value="{StaticResource Primary}" />
                                                 </DataTrigger>
                                                 <DataTrigger TargetType="Image" Binding="{Binding IsActive}" Value="false">
-                                                    <Setter Property="xe:IconTintColorEffect.Color" Value="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}" />
+                                                    <Setter Property="me:IconTintColorEffect.Color" Value="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}" />
                                                 </DataTrigger>
                                             </Image.Triggers>
                                         </Image>
@@ -146,27 +146,27 @@
                 <Style TargetType="Image">
                     <Setter Property="HeightRequest" Value="20" />
                     <Setter Property="VerticalOptions" Value="Center" />
-                    <Setter Property="xe:IconTintColorEffect.Color" Value="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}" />
+                    <Setter Property="me:IconTintColorEffect.Color" Value="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}" />
                 </Style>
             </StackLayout.Resources>
             <BindableLayout.ItemTemplate>
                 <DataTemplate x:DataType="m:TabMenuModel">
-                    <StackLayout xe:TouchEffect.Color="{StaticResource TranslucidBlack2}"
-                                 xe:Commands.Tap="{Binding Path=BindingContext.SwitchViewCommand, Source={x:Reference mainRoot}}"
-                                 xe:Commands.TapParameter="{Binding .}"
-                                 xe:CornerRadiusEffect.CornerRadius="6">
-                        <!--<StackLayout.GestureRecognizers>
+                    <StackLayout me:TouchEffect.Color="{StaticResource TranslucidBlack2}"
+                                 me:Commands.Tap="{Binding Path=BindingContext.SwitchViewCommand, Source={x:Reference mainRoot}}"
+                                 me:Commands.TapParameter="{Binding .}"
+                                 me:CornerRadiusEffect.CornerRadius="6">
+                        <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding Path=BindingContext.SwitchViewCommand, Source={x:Reference mainRoot}}"
                                                   CommandParameter="{Binding .}" />
-                        </StackLayout.GestureRecognizers>-->
+                        </StackLayout.GestureRecognizers>
                         <Grid HeightRequest="20">
                             <Image Source="{Binding Icon}">
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding IsActive}" Value="true">
-                                        <Setter Property="xe:IconTintColorEffect.Color" Value="{StaticResource Primary}" />
+                                        <Setter Property="me:IconTintColorEffect.Color" Value="{StaticResource Primary}" />
                                     </DataTrigger>
                                     <DataTrigger TargetType="Image" Binding="{Binding IsActive}" Value="false">
-                                        <Setter Property="xe:IconTintColorEffect.Color" Value="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}" />
+                                        <Setter Property="me:IconTintColorEffect.Color" Value="{AppThemeBinding Dark={StaticResource TextColorSecondaryDark}, Light={StaticResource TextColorSecondaryLight}}" />
                                     </DataTrigger>
                                     <DataTrigger TargetType="Image" Binding="{Binding Action}" Value="{x:Static common:BottomAction.More}">
                                         <Setter Property="HeightRequest"  Value="6" />

@@ -13,21 +13,22 @@ namespace MauiBase
             _navigation = navigation;
         }
 
-        protected override void OnParentSet()
+        protected override async void OnParentSet()
         {
             base.OnParentSet();
 
-            //if (Parent is not null)
-            //{
-            //    //Login or MainPage
-            //    await _navigation.NavigateAsync("//MainPage");
-            //}
+            //TODO: Identify where to go? to login or Startup page.
+            if (Parent is not null)
+            {
+                //Login or MainPage
+                await _navigation.NavigateAsync("//LoginPage");
+            }
         }
 
         #region Private Methods
         private void RegisterRoutes()
         {
-            var assm = Assembly.GetAssembly(typeof(MainPage));
+            var assm = Assembly.GetAssembly(typeof(LoginPage));
             var lists = assm?.GetTypes().ToList();
 
             if (lists is null || lists.Count == 0)

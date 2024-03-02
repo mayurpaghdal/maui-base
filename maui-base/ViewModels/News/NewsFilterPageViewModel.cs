@@ -131,7 +131,7 @@ public class NewsFilterPageViewModel : BaseViewModel
     #region Overridden Methods
     public override void InitCommands()
     {
-
+        GoBackCommand = new AsyncRelayCommand(NavigateBack);
     }
 
     public override void SetResources()

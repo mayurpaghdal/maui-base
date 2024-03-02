@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:xe="clr-namespace:MauiBase.Effects"
+             xmlns:xe="http://schemas.maui-extended.com/extenders"
              x:Class="MauiBase.Controls.PopupView"
              IsVisible="false"
              BackgroundColor="{StaticResource TranslucidBlack}"

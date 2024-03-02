@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<local:BaseContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                       xmlns:vm="clr-namespace:MauiBase.ViewModels"
+                       xmlns:m="clr-namespace:MauiBase.Models"
+                       xmlns:local="clr-namespace:MauiBase.Views"
+                       xmlns:skia="clr-namespace:SkiaSharp.Extended.UI.Controls;assembly=SkiaSharp.Extended.UI"
+                       x:TypeArguments="vm:UserInitializePageViewModel"
+                       x:Class="MauiBase.Views.UserInitializePage"
+                       Title="Initialize">
+    <Grid x:DataType="vm:ItemDetailPageViewModel" Padding="16">
+        <skia:SKLottieView Source="anim_app_config.json" 
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Center"
+                           HeightRequest="300"
+                           Style="{StaticResource LottieBaseStyle}"/>
+    </Grid>
+</local:BaseContentPage>

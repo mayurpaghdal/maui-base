@@ -3,14 +3,11 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                       x:Class="MauiBase.Views.NewsFilterPage"
                       xmlns:base="clr-namespace:MauiBase.Views"
+                      xmlns:xe="clr-namespace:Maui.Extender.Effects;assembly=Maui.Extender"
                       xmlns:vm="clr-namespace:MauiBase.ViewModels"
-                      xmlns:xe="clr-namespace:MauiBase.Effects"
                       x:TypeArguments="vm:NewsFilterPageViewModel"
                       xmlns:controls="clr-namespace:MauiBase.Controls"
-                      xmlns:mopup="clr-namespace:Mopups.Pages;assembly=Mopups"
-                      xmlns:animations="clr-namespace:Mopups.Animations;assembly=Mopups"
                       Title="NewsFilterPage"
-                      Mode="ModalPopup"
                       Shell.PresentationMode="ModalNotAnimated"
                       PopInContentDirection="RightToLeft"
                       BackgroundColor="Transparent"
@@ -23,7 +20,7 @@
           ColumnSpacing="0">
         <Grid>
             <Grid.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding GoBackCommand}" CommandParameter="{x:Boolean False}" />
+                <TapGestureRecognizer Command="{Binding GoBackCommand}" />
             </Grid.GestureRecognizers>
         </Grid>
 

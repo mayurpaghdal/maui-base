@@ -1,7 +1,6 @@
 ﻿#if ANDROID
 using Android.Views;
 using Microsoft.Maui.Controls.Compatibility.Platform.Android;
-using Microsoft.Maui.Controls.Platform;
 using AV = Android.Views;
 using View = Android.Views.View;
 #endif
@@ -11,7 +10,7 @@ using UIKit;
 using Microsoft.Maui.Controls.Compatibility.Platform.iOS;
 #endif
 
-using Microsoft.Maui.Platform;
+using Microsoft.Maui.Controls.Platform;
 using MC = Microsoft.Maui.Controls;
 using System.Windows.Input;
 
@@ -134,7 +133,7 @@ public class CommandsRoutingEffect : RoutingEffect
     public CommandsRoutingEffect() : base()
     {
     }
-} 
+}
 #endregion
 
 #if ANDROID
@@ -167,11 +166,11 @@ public class CommandEffectPlatform : PlatformEffect
             case MotionEventActions.Up:
                 //if (IsViewInBounds((int)args.Event.RawX, (int)args.Event.RawY))
                 //{
-                    var range = (DateTime.Now - _tapTime).TotalMilliseconds;
-                    if (range > 800)
-                        LongClickHandler();
-                    else
-                        ClickHandler();
+                var range = (DateTime.Now - _tapTime).TotalMilliseconds;
+                if (range > 800)
+                    LongClickHandler();
+                else
+                    ClickHandler();
                 //}
                 break;
         }
@@ -216,10 +215,10 @@ public class CommandEffectPlatform : PlatformEffect
 }
 #endif
 
-#if iOS
-public class CommandsPlatform : PlatformEffect
+#if IOS
+public class CommandEffectPlatform : PlatformEffect
 {
-    public UIKit.UIView View => Control ?? Container;
+    public UIView View => Control ?? Container;
 
     DateTime _tapTime;
     ICommand _tapCommand;

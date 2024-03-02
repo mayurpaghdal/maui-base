@@ -8,9 +8,16 @@
     Shell.NavBarIsVisible="False"
     Title="MauiBase">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar Route="LoginPage">
+        <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
+    </TabBar>
+
+    <TabBar Route="UserInitializePage">
+        <ShellContent ContentTemplate="{DataTemplate local:UserInitializePage}" />
+    </TabBar>
+
+    <TabBar Route="MainPage">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+    </TabBar>
 
 </Shell>

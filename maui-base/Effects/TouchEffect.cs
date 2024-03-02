@@ -16,7 +16,6 @@ using Foundation;
 using Microsoft.Maui.Controls.Platform;
 using Microsoft.Maui.Controls.Compatibility.Platform.iOS;
 using UIKit;
-using MauiBase.Effects;
 #endif
 
 using MC = Microsoft.Maui.Controls;
@@ -322,7 +321,7 @@ public class TouchEffectPlatform : PlatformEffect
         if (group is null)
             group = (sender as AV.View)!;
 
-        if (group is null || IsDisposed) 
+        if (group is null || IsDisposed)
             return;
         _viewOverlay.Right = group.Width;
         _viewOverlay.Bottom = group.Height;
@@ -332,7 +331,7 @@ public class TouchEffectPlatform : PlatformEffect
 
     RippleDrawable CreateRipple(AG.Color color)
     {
-        var maskColor = App.Current.UserAppTheme == AppTheme.Dark ? AG.Color.Black : AG.Color.White;
+        var maskColor = Application.Current.UserAppTheme == AppTheme.Dark ? AG.Color.Black : AG.Color.White;
         if (Element is Layout)
         {
             var mask = new ColorDrawable(maskColor);
@@ -646,7 +645,7 @@ public class TouchGestureRecognizerDelegate : UIGestureRecognizerDelegate
 
 public class TouchEffectPlatform : PlatformEffect
 {
-    public bool IsDisposed => (Container as IVisualElementRenderer)?.Element == null;
+    private bool IsDisposed = false;
     public UIView View => Control ?? Container;
 
     UIView _layer;
@@ -662,7 +661,7 @@ public class TouchEffectPlatform : PlatformEffect
             Alpha = 0,
             TranslatesAutoresizingMaskIntoConstraints = false
         };
-
+        
         UpdateEffectColor();
         TouchGestureCollector.Add(View, OnTouch);
 
@@ -679,6 +678,7 @@ public class TouchEffectPlatform : PlatformEffect
         TouchGestureCollector.Delete(View, OnTouch);
         _layer?.RemoveFromSuperview();
         _layer?.Dispose();
+        IsDisposed = true;
     }
 
     void OnTouch(TouchGestureRecognizer.TouchArgs e)
@@ -736,7 +736,7 @@ public class TouchEffectPlatform : PlatformEffect
         if (!IsDisposed && _layer != null)
         {
             _layer.Layer.RemoveAllAnimations();
-            UIView.Animate(0.225,
+            UIView.Animate(0.5,
             () =>
             {
                 _layer.Alpha = 0;

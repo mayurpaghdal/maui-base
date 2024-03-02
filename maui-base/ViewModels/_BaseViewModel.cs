@@ -9,6 +9,8 @@ public partial class BaseViewModel : RootBaseViewModel
 
     [ObservableProperty]
     private string title = string.Empty;
+
+    public bool IsBackNavigated { get; private set; }
     #endregion
 
     #region Services
@@ -19,7 +21,7 @@ public partial class BaseViewModel : RootBaseViewModel
                          IEventAggregator eventAggregator = null!)
         : base(navigation, eventAggregator)
     {
-
+        IsBackNavigated = _navigation.Mode == Common.NavigationMode.Back;
     }
     #endregion
 

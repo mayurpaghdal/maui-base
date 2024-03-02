@@ -1,89 +1,12 @@
-﻿
-namespace MauiBase.Views;
+﻿namespace MauiBase.Views;
+
 public interface IBasePage { }
+
 public partial class BasePage : ContentPage, IBasePage
 {
-    //public IList<IView> PageContent => PageContentGrid.Children;
-    //public IList<IView> PageIcons => PageIconsGrid.Children;
-
     public ContentPopDirection PopInContentDirection { get; set; } = ContentPopDirection.BottomToTop;
 
-    protected bool IsBackButtonEnabled
-    {
-        set => NavigateBackButton.IsEnabled = value;
-    }
-
     #region Bindable properties
-    public static readonly BindableProperty PageTitleProperty = BindableProperty.Create(
-        nameof(PageTitle),
-        typeof(string),
-        typeof(BasePage),
-        string.Empty,
-        defaultBindingMode:
-        BindingMode.OneWay,
-        propertyChanged: OnPageTitleChanged);
-
-    public string PageTitle
-    {
-        get => (string)GetValue(PageTitleProperty);
-        set => SetValue(PageTitleProperty, value);
-    }
-
-    private static void OnPageTitleChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        if (bindable != null && bindable is BasePage basePage)
-        {
-            basePage.TitleLabel.Text = (string)newValue;
-            basePage.TitleLabel.IsVisible = true;
-        }
-    }
-
-    public static readonly BindableProperty ModeProperty = BindableProperty.Create(
-        nameof(Mode),
-        typeof(PageMode),
-        typeof(BasePage),
-        PageMode.Navigate,
-        propertyChanged: OnPageModePropertyChanged);
-
-    public PageMode Mode
-    {
-        get => (PageMode)GetValue(ModeProperty);
-        set => SetValue(ModeProperty, value);
-    }
-
-    private static void OnPageModePropertyChanged(BindableObject bindable, object oldValue, object newValue)
-    {
-        if (bindable != null && bindable is BasePage basePage)
-            basePage.SetPageMode((PageMode)newValue);
-    }
-
-    private void SetPageMode(PageMode pageMode)
-    {
-        switch (pageMode)
-        {
-            case PageMode.Menu:
-                HamburgerButton.IsVisible = true;
-                NavigateBackButton.IsVisible = false;
-                CloseButton.IsVisible = false;
-                break;
-            case PageMode.Navigate:
-                HamburgerButton.IsVisible = false;
-                NavigateBackButton.IsVisible = true;
-                CloseButton.IsVisible = false;
-                break;
-            case PageMode.Modal:
-                HamburgerButton.IsVisible = false;
-                NavigateBackButton.IsVisible = false;
-                CloseButton.IsVisible = true;
-                break;
-            default:
-                HamburgerButton.IsVisible = false;
-                NavigateBackButton.IsVisible = false;
-                CloseButton.IsVisible = false;
-                break;
-        }
-    }
-
 
     public static readonly BindableProperty DisplayModeProperty = BindableProperty.Create(
         nameof(DisplayMode),
@@ -106,36 +29,37 @@ public partial class BasePage : ContentPage, IBasePage
 
     private void SetDisplayMode(DisplayMode DisplayMode)
     {
-        switch (DisplayMode)
-        {
-            case DisplayMode.NavigationBar:
-                Grid.SetRow(PageContentGrid, 2);
-                Grid.SetRowSpan(PageContentGrid, 1);
-                break;
-            case DisplayMode.NoNavigationBar:
-                Grid.SetRow(PageContentGrid, 0);
-                Grid.SetRowSpan(PageContentGrid, 3);
-                break;
-            default:
-                //Do Nothing
-                break;
-        }
+        //switch (DisplayMode)
+        //{
+        //    case DisplayMode.NavigationBar:
+        //        Grid.SetRow(PageContentGrid, 2);
+        //        Grid.SetRowSpan(PageContentGrid, 1);
+        //        break;
+        //    case DisplayMode.NoNavigationBar:
+        //        Grid.SetRow(PageContentGrid, 0);
+        //        Grid.SetRowSpan(PageContentGrid, 3);
+        //        break;
+        //    default:
+        //        //Do Nothing
+        //        break;
+        //}
     }
     #endregion
 
+    #region Ctor
     public BasePage()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
+
+        Shell.SetNavBarIsVisible(this, false);
 
         //Hide the Maui build in navigation header
         NavigationPage.SetHasNavigationBar(this, false);
 
-        //Set Page Mode
-        SetPageMode(PageMode.None);
-
         //Set Content Display Mode
         SetDisplayMode(DisplayMode.NoNavigationBar);
-    }
+    } 
+    #endregion
 
     #region Internal Methods
     internal void PopIn(Easing easing)

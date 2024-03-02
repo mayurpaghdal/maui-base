@@ -1,8 +1,4 @@
-﻿using MauiBase.Helpers;
-using Mopups.Services;
-using System.Runtime.CompilerServices;
-
-namespace MauiBase.Views;
+﻿namespace MauiBase.Views;
 
 public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : BaseViewModel
 {
@@ -10,7 +6,6 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
     protected bool _isLoaded = false;
 
     protected TViewModel _vm { get; set; }
-    //internal NavigationParameters Parameters { get; set; }
 
     protected event EventHandler ViewModelInitialized;
     #endregion
@@ -21,10 +16,22 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
         BindingContext = _vm = ServiceHelper.GetService<TViewModel>();
         this.Loaded += BaseContentPage_Loaded;
     }
+    #endregion
 
+    #region Events
     private void BaseContentPage_Loaded(object? sender, EventArgs e)
     {
-        if (Mode == PageMode.ModalPopup)
+        if (_vm is not null)
+        {
+            try
+            {
+                _vm.Page = this;
+                _vm.PagePresentationMode = Shell.GetPresentationMode(this);
+            }
+            catch { }
+        }
+
+        if (_vm.PagePresentationMode == PresentationMode.ModalNotAnimated)
         {
             BackgroundColor = Colors.Black.WithAlpha(0f);
             Background = new SolidColorBrush(Colors.Black.WithAlpha(0f));
@@ -39,11 +46,6 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
             PopIn(Easing.CubicInOut);
         }
     }
-
-    //public BaseContentPage(NavigationParameters parameters) : base()
-    //{
-    //    Parameters = parameters;
-    //}
     #endregion
 
     #region Overridden Methods
@@ -54,32 +56,29 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
         {
             base.OnAppearing();
 
-            _vm.Navigation = this.Navigation;
-            _vm.Page = this;
-
             //Raise Event to notify that ViewModel has been Initialized
             ViewModelInitialized?.Invoke(this, new EventArgs());
-            
+
             //Navigate to View Model's OnNavigatedTo method
-            _vm.OnNavigatedTo(_vm._parameters);
+            _vm.OnNavigatedTo(_vm.NavParameters);
 
             _isLoaded = true;
         }
         else
-            _vm.OnRecurringNavigatedTo(_vm._parameters);
+            _vm.OnRecurringNavigatedTo(_vm.NavParameters);
 
-        _vm._parameters = null!;
+        _vm.NavParameters = null!;
     }
 
     protected override void OnDisappearing()
     {
         base.OnDisappearing();
-        _vm.OnNavigatedFrom(_vm._parameters);
+        _vm.OnNavigatedFrom(_vm.NavParameters);
     }
 
     protected override bool OnBackButtonPressed()
     {
-        if (Mode == PageMode.ModalPopup)
+        if (_vm.PagePresentationMode == PresentationMode.ModalNotAnimated)
         {
             GoBackAsync();
             return true;
@@ -91,7 +90,8 @@ public partial class BaseContentPage<TViewModel> : BasePage where TViewModel : B
     #region Protected Methods
     protected async void GoBackAsync()
     {
-        await _vm.GoBackCommand?.ExecuteAsync(false)!;
+        if (_vm.GoBackCommand is not null)
+            await _vm.GoBackCommand.ExecuteAsync(false)!;
     }
     #endregion
 }

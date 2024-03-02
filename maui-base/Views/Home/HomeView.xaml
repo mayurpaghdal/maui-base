@@ -3,6 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:controls="clr-namespace:MauiBase.Controls"
                     xmlns:vm="clr-namespace:MauiBase.ViewModels"
+                    xmlns:me="clr-namespace:Maui.Extender.Effects;assembly=Maui.Extender"
                     x:Class="MauiBase.Views.HomeView"
                     x:DataType="vm:HomeViewModel"
                     Padding="16">
@@ -22,7 +23,19 @@
 
 
         <Button Text="Open Filter Page"
-        HorizontalOptions="Center"
-        Command="{Binding FilterCommand}" />
+                HorizontalOptions="Center"
+                Command="{Binding FilterCommand}" />
+
+        <StackLayout HeightRequest="200"
+                     WidthRequest="200"
+                     HorizontalOptions="Center"
+                     Background="Red"
+                     me:CornerRadiusEffect.CornerRadius="26"/>
+
+        <Label x:Name="lblCounter" Text="--"
+               Style="{StaticResource Headline}"
+               VerticalOptions="Center" 
+               Padding="6"
+               HorizontalOptions="Center" />
     </VerticalStackLayout>
 </controls:ChildView>
